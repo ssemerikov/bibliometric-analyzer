@@ -1,0 +1,23 @@
+﻿id	label	x	y	cluster	weight<Links>	weight<Documents>	weight<Citations>	weight<Norm. citations>	score<Avg. pub. year>	score<Avg. citations>	score<Avg. norm. citations>
+9	"aleven, vincent a.w.m.m."	0.3715	0.194	1	0	2	33	2	2012.5	16.5	1
+25	"bastida, nora"	0.7942	0.2811	2	0	2	33	2	2012.5	16.5	1
+35	"brice, sean"	0.3529	-0.2242	3	0	2	33	2	2012.5	16.5	1
+50	"champer, matt"	-0.83	0.0407	4	0	2	33	2	2012.5	16.5	1
+59	"christel, michael g."	-0.3536	0.2247	5	0	2	33	2	2012.5	16.5	1
+63	"comber, oswald"	0.283	-0.7838	6	0	2	34	4.9815	2019.5	17	2.4907
+75	"dickson, paul e."	-0.0177	-0.4176	7	0	2	64	3.8607	2016	32	1.9304
+108	"harpstead, erik"	-0.5597	0.6235	8	0	2	33	2	2012.5	16.5	1
+112	"hausmann, daniel"	-0.6187	-0.5656	9	0	2	33	2	2012.5	16.5	1
+114	"hmeljak, dimitrij mitja"	-0.794	-0.2811	10	0	3	4	2	2020.6667	1.3333	0.6667
+116	"hossain, md yousuf"	0.6187	0.5658	11	0	2	5	2.1212	2022.5	2.5	1.0606
+137	"kaur, amanpreet"	0.0417	0.843	12	0	2	27	5.5833	2023	13.5	2.7917
+146	"koedinger, kenneth r."	-0.2827	0.7838	13	0	2	33	2	2012.5	16.5	1
+148	"kortemeyer, gerd"	-0.7629	0.3582	14	0	2	4	0.5432	2021.5	2	0.2716
+165	"maher, bryan s."	-0.0417	-0.8432	15	0	2	33	2	2012.5	16.5	1
+176	"mayer, hubert"	0.0177	0.4168	16	0	2	34	4.9815	2019.5	17	2.4907
+182	"moiseienko, natalia v."	0.83	-0.0409	17	0	2	10	13.8182	2024	5	6.9091
+183	"motschnig-pitrik, renate"	0.5597	-0.6233	18	0	2	34	4.9815	2019.5	17	2.4907
+238	"stevens, scott m."	-0.3583	-0.7519	19	0	2	33	2	2012.5	16.5	1
+268	"zaman, loutfouz"	-0.3708	-0.1936	20	0	2	5	2.1212	2022.5	2.5	1.0606
+270	"zhang, holly"	0.358	0.752	21	0	2	4	2	2020	2	1
+271	"zhang, xun"	0.7627	-0.3582	22	0	2	33	2	2012.5	16.5	1

@@ -1,0 +1,5 @@
+﻿id	label	x	y	cluster	weight<Links>	weight<Documents>	weight<Citations>	weight<Norm. citations>	score<Avg. pub. year>	score<Avg. citations>	score<Avg. norm. citations>
+10	ecuador	-0.8398	0	2	1	2	7	2.9697	2024	3.5	1.4848
+11	germany	0.4797	0	1	2	5	10	3.5513	2023.4	2	0.7103
+29	spain	-0.4802	-0	2	2	3	32	6.3648	2021.6667	10.6667	2.1216
+35	united states	0.8403	-0	1	1	18	125	15.1011	2019.6111	6.9444	0.839

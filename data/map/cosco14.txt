@@ -1,0 +1,12 @@
+﻿id	label	x	y	cluster	weight<Links>	weight<Total link strength>	weight<Documents>	weight<Citations>	weight<Norm. citations>	score<Avg. pub. year>	score<Avg. citations>	score<Avg. norm. citations>
+9	"aleven, vincent a.w.m.m."	-0.654	-0.4434	1	10	240	2	33	2	2012.5	16.5	1
+25	"bastida, nora"	-0.02	0.76	1	10	240	2	33	2	2012.5	16.5	1
+35	"brice, sean"	0.7819	0.182	1	10	240	2	33	2	2012.5	16.5	1
+50	"champer, matt"	0.4535	0.6282	1	10	240	2	33	2	2012.5	16.5	1
+59	"christel, michael g."	-0.2827	-0.0035	1	10	240	2	33	2	2012.5	16.5	1
+108	"harpstead, erik"	-0.2245	-0.7312	1	10	240	2	33	2	2012.5	16.5	1
+112	"hausmann, daniel"	-0.7919	0.1324	1	10	240	2	33	2	2012.5	16.5	1
+146	"koedinger, kenneth r."	0.2821	-0.003	1	10	240	2	33	2	2012.5	16.5	1
+165	"maher, bryan s."	0.6823	-0.4058	1	10	240	2	33	2	2012.5	16.5	1
+238	"stevens, scott m."	0.2628	-0.7192	1	10	240	2	33	2	2012.5	16.5	1
+271	"zhang, xun"	-0.4895	0.6036	1	10	240	2	33	2	2012.5	16.5	1

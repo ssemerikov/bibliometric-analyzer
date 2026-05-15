@@ -1,0 +1,390 @@
+{
+  "zones": [
+    {
+      "zone": 1,
+      "n_sources": 31,
+      "n_docs": 504,
+      "sources": [
+        [
+          "Proceedings of the European Conference on Games-based Learning",
+          67
+        ],
+        [
+          "ACM International Conference Proceeding Series",
+          54
+        ],
+        [
+          "Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)",
+          53
+        ],
+        [
+          "Proceedings - Frontiers in Education Conference, FIE",
+          39
+        ],
+        [
+          "Lecture Notes in Networks and Systems",
+          31
+        ],
+        [
+          "Communications in Computer and Information Science",
+          28
+        ],
+        [
+          "ASEE Annual Conference and Exposition, Conference Proceedings",
+          27
+        ],
+        [
+          "Annual Conference on Innovation and Technology in Computer Science Education, ITiCSE",
+          17
+        ],
+        [
+          "CEUR Workshop Proceedings",
+          16
+        ],
+        [
+          "Advances in Intelligent Systems and Computing",
+          13
+        ],
+        [
+          "Journal of Physics: Conference Series",
+          12
+        ],
+        [
+          "AIP Conference Proceedings",
+          12
+        ],
+        [
+          "Entertainment Computing",
+          11
+        ],
+        [
+          "Lecture Notes in Computer Science",
+          11
+        ],
+        [
+          "IEEE Global Engineering Education Conference, EDUCON",
+          11
+        ],
+        [
+          "Procedia Computer Science",
+          10
+        ],
+        [
+          "JMIR Serious Games",
+          9
+        ],
+        [
+          "Computers and Education",
+          9
+        ],
+        [
+          "Proceedings - 3rd International Conference on Game Development in Computer Science Education, GDCSE 2008",
+          9
+        ],
+        [
+          "Proceedings of the 11th European Conference on Games Based Learning, ECGBL 2017",
+          8
+        ],
+        [
+          "Proceedings of the ACM on Human-Computer Interaction",
+          6
+        ],
+        [
+          "SIGCSE'09 - Proceedings of the 40th ACM Technical Symposium on Computer Science Education",
+          6
+        ],
+        [
+          "Smart Innovation, Systems and Technologies",
+          5
+        ],
+        [
+          "International Conference on Computer Supported Education, CSEDU - Proceedings",
+          5
+        ],
+        [
+          "International Journal of Serious Games",
+          5
+        ]
+      ]
+    },
+    {
+      "zone": 2,
+      "n_sources": 282,
+      "n_docs": 503,
+      "sources": [
+        [
+          "SIGCSE Bulletin Inroads",
+          5
+        ],
+        [
+          "FDG 2010 - Proceedings of the 5th International Conference on the Foundations of Digital Games",
+          5
+        ],
+        [
+          "ACM Future Play 2008 International Academic Conference on the Future of Game Design and Technology, Future Play: Research, Play, Share",
+          5
+        ],
+        [
+          "SIGITE 2023 - Proceedings of the 24th Annual Conference on Information Technology Education",
+          4
+        ],
+        [
+          "Education and Information Technologies",
+          4
+        ],
+        [
+          "Games and Culture",
+          4
+        ],
+        [
+          "ACM Transactions on Computing Education",
+          4
+        ],
+        [
+          "Education Sciences",
+          4
+        ],
+        [
+          "IEEE Computer Graphics and Applications",
+          4
+        ],
+        [
+          "International Journal of Game-Based Learning",
+          4
+        ],
+        [
+          "International Journal of Gaming and Computer-Mediated Simulations",
+          4
+        ],
+        [
+          "FDG 2009 - 4th International Conference on the Foundations of Digital Games, Proceedings",
+          4
+        ],
+        [
+          "SIGCSE'12 - Proceedings of the 43rd ACM Technical Symposium on Computer Science Education",
+          4
+        ],
+        [
+          "Proceedings of the Annual Southeast Conference",
+          4
+        ],
+        [
+          "SIGCSE 2007: 38th SIGCSE Technical Symposium on Computer Science Education",
+          4
+        ],
+        [
+          "IEEE Transactions on Learning Technologies",
+          3
+        ],
+        [
+          "Proceedings -  International Conference on Education and Technology, ICET",
+          3
+        ],
+        [
+          "Applied Human Factors and Ergonomics International",
+          3
+        ],
+        [
+          "Lecture Notes in Educational Technology",
+          3
+        ],
+        [
+          "Applied Sciences (Switzerland)",
+          3
+        ],
+        [
+          "Sustainability (Switzerland)",
+          3
+        ],
+        [
+          "Frontiers in Education",
+          3
+        ],
+        [
+          "Journal on Interactive Systems",
+          3
+        ],
+        [
+          "Proceedings of the 20th International Conference on the Foundations of Digital Games, FDG 2025",
+          3
+        ],
+        [
+          "Cogent Education",
+          3
+        ]
+      ]
+    },
+    {
+      "zone": 3,
+      "n_sources": 503,
+      "n_docs": 503,
+      "sources": [
+        [
+          "ICAN 2022 - 3rd International Conference on Computing, Analytics and Networks - Proceedings",
+          1
+        ],
+        [
+          "Proceedings - International Conference on Developments in eSystems Engineering, DeSE",
+          1
+        ],
+        [
+          "Essentials",
+          1
+        ],
+        [
+          "Journal of the American Geriatrics Society",
+          1
+        ],
+        [
+          "CIbSE 2025 - 28th Ibero-American Conference on Software Engineering",
+          1
+        ],
+        [
+          "2024 6th International Conference on Audio for Games",
+          1
+        ],
+        [
+          "Foresight and STI Governance",
+          1
+        ],
+        [
+          "Lecture Notes on Data Engineering and Communications Technologies",
+          1
+        ],
+        [
+          "Technological Forecasting and Social Change",
+          1
+        ],
+        [
+          "Journal of Economics and Management (Poland)",
+          1
+        ],
+        [
+          "Revista Brasileira de Ensino de Fisica",
+          1
+        ],
+        [
+          "Integrative Conservation",
+          1
+        ],
+        [
+          "2023 IEEE 2nd German Education Conference, GECon 2023",
+          1
+        ],
+        [
+          "EMNLP 2024 - 2024 Conference on Empirical Methods in Natural Language Processing, Proceedings of System Demonstrations",
+          1
+        ],
+        [
+          "Educational Process: International Journal",
+          1
+        ],
+        [
+          "Journal of Educational Research",
+          1
+        ],
+        [
+          "Global Perspectives on Micro-Learning and Micro-Credentials in Higher Education",
+          1
+        ],
+        [
+          "International Journal of Digital Multimedia Broadcasting",
+          1
+        ],
+        [
+          "2026 5th International Conference on Electrical, Computer and Telecommunication Engineering, ICECTE 2026",
+          1
+        ],
+        [
+          "Journal of Ecohumanism",
+          1
+        ],
+        [
+          "Proceedings of the International Conferences on Digital Transformation and Innovation Management 2024, DTIM 2024; and ICT, Society and Human Beings 2024, ICT 2024",
+          1
+        ],
+        [
+          "Proceedings - 2023 12th International Conference of Educational Innovation through Technology, EITT 2023",
+          1
+        ],
+        [
+          "International Journal on Advanced Science, Engineering and Information Technology",
+          1
+        ],
+        [
+          "International Conference on Software, Knowledge Information, Industrial Management and Applications, SKIMA",
+          1
+        ],
+        [
+          "International Journal of Developmental Disabilities",
+          1
+        ]
+      ]
+    }
+  ],
+  "multiplier_k": 4.028126916025972,
+  "total_sources": 816,
+  "total_docs": 1510,
+  "top_sources": [
+    [
+      "Proceedings of the European Conference on Games-based Learning",
+      67
+    ],
+    [
+      "ACM International Conference Proceeding Series",
+      54
+    ],
+    [
+      "Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)",
+      53
+    ],
+    [
+      "Proceedings - Frontiers in Education Conference, FIE",
+      39
+    ],
+    [
+      "Lecture Notes in Networks and Systems",
+      31
+    ],
+    [
+      "Communications in Computer and Information Science",
+      28
+    ],
+    [
+      "ASEE Annual Conference and Exposition, Conference Proceedings",
+      27
+    ],
+    [
+      "Annual Conference on Innovation and Technology in Computer Science Education, ITiCSE",
+      17
+    ],
+    [
+      "CEUR Workshop Proceedings",
+      16
+    ],
+    [
+      "Advances in Intelligent Systems and Computing",
+      13
+    ],
+    [
+      "Journal of Physics: Conference Series",
+      12
+    ],
+    [
+      "AIP Conference Proceedings",
+      12
+    ],
+    [
+      "Entertainment Computing",
+      11
+    ],
+    [
+      "Lecture Notes in Computer Science",
+      11
+    ],
+    [
+      "IEEE Global Engineering Education Conference, EDUCON",
+      11
+    ]
+  ]
+}

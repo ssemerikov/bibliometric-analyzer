@@ -1,0 +1,1289 @@
+{
+  "hhi_country": 0.06500354139274403,
+  "hhi_institution": 0.0009399477806788512,
+  "gini_country": 0.687606018722121,
+  "gini_institution": 0.18607427284422848,
+  "top_countries": [
+    [
+      "United States",
+      306
+    ],
+    [
+      "United Kingdom",
+      89
+    ],
+    [
+      "Germany",
+      66
+    ],
+    [
+      "Brazil",
+      62
+    ],
+    [
+      "China",
+      61
+    ],
+    [
+      "Indonesia",
+      61
+    ],
+    [
+      "Malaysia",
+      57
+    ],
+    [
+      "Spain",
+      44
+    ],
+    [
+      "Canada",
+      43
+    ],
+    [
+      "Australia",
+      32
+    ]
+  ],
+  "top_institutions": [
+    [
+      "School of Computer Science",
+      15
+    ],
+    [
+      "Department of Computer Science",
+      9
+    ],
+    [
+      "Computer Science Department",
+      9
+    ],
+    [
+      "Bulgarian Academy of Sciences",
+      7
+    ],
+    [
+      "Universiti Kebangsaan Malaysia",
+      7
+    ],
+    [
+      "University of North Carolina at Charlotte",
+      7
+    ],
+    [
+      "Faculty of Engineering",
+      6
+    ],
+    [
+      "School of Computing",
+      6
+    ],
+    [
+      "Universiti Teknologi MARA",
+      6
+    ],
+    [
+      "United States",
+      6
+    ]
+  ],
+  "unique_countries": 88,
+  "unique_institutions": 1514,
+  "collaboration_edges": [
+    {
+      "source": "United States",
+      "target": "Germany",
+      "weight": 2
+    },
+    {
+      "source": "United States",
+      "target": "Malta",
+      "weight": 1
+    },
+    {
+      "source": "United States",
+      "target": "Australia",
+      "weight": 4
+    },
+    {
+      "source": "United States",
+      "target": "Denmark",
+      "weight": 1
+    },
+    {
+      "source": "United States",
+      "target": "Finland",
+      "weight": 2
+    },
+    {
+      "source": "United States",
+      "target": "Italy",
+      "weight": 1
+    },
+    {
+      "source": "United States",
+      "target": "Netherlands",
+      "weight": 1
+    },
+    {
+      "source": "United States",
+      "target": "Poland",
+      "weight": 1
+    },
+    {
+      "source": "United States",
+      "target": "Romania",
+      "weight": 1
+    },
+    {
+      "source": "United States",
+      "target": "Switzerland",
+      "weight": 2
+    },
+    {
+      "source": "United States",
+      "target": "Turkey",
+      "weight": 2
+    },
+    {
+      "source": "United States",
+      "target": "United Kingdom",
+      "weight": 7
+    },
+    {
+      "source": "United States",
+      "target": "Canada",
+      "weight": 7
+    },
+    {
+      "source": "United States",
+      "target": "Devon Energy",
+      "weight": 1
+    },
+    {
+      "source": "United States",
+      "target": "Austria",
+      "weight": 2
+    },
+    {
+      "source": "United States",
+      "target": "New Zealand",
+      "weight": 1
+    },
+    {
+      "source": "United States",
+      "target": "China",
+      "weight": 2
+    },
+    {
+      "source": "United States",
+      "target": "Qatar",
+      "weight": 1
+    },
+    {
+      "source": "United States",
+      "target": "Spain",
+      "weight": 2
+    },
+    {
+      "source": "United States",
+      "target": "Argentina",
+      "weight": 1
+    },
+    {
+      "source": "United States",
+      "target": "Iran, Islamic Republic of",
+      "weight": 1
+    },
+    {
+      "source": "United States",
+      "target": "Iraq",
+      "weight": 1
+    },
+    {
+      "source": "United States",
+      "target": "Colombia",
+      "weight": 1
+    },
+    {
+      "source": "United States",
+      "target": "Brazil",
+      "weight": 1
+    },
+    {
+      "source": "United States",
+      "target": "Saudi Arabia",
+      "weight": 1
+    },
+    {
+      "source": "United States",
+      "target": "Singapore",
+      "weight": 1
+    },
+    {
+      "source": "United States",
+      "target": "Taiwan",
+      "weight": 1
+    },
+    {
+      "source": "Turkey",
+      "target": "Denmark",
+      "weight": 1
+    },
+    {
+      "source": "Turkey",
+      "target": "Finland",
+      "weight": 1
+    },
+    {
+      "source": "Turkey",
+      "target": "Germany",
+      "weight": 1
+    },
+    {
+      "source": "Turkey",
+      "target": "Italy",
+      "weight": 2
+    },
+    {
+      "source": "Turkey",
+      "target": "Netherlands",
+      "weight": 1
+    },
+    {
+      "source": "Turkey",
+      "target": "Poland",
+      "weight": 1
+    },
+    {
+      "source": "Turkey",
+      "target": "Romania",
+      "weight": 1
+    },
+    {
+      "source": "Turkey",
+      "target": "Switzerland",
+      "weight": 1
+    },
+    {
+      "source": "Turkey",
+      "target": "United Kingdom",
+      "weight": 2
+    },
+    {
+      "source": "Turkey",
+      "target": "Malaysia",
+      "weight": 1
+    },
+    {
+      "source": "Turkey",
+      "target": "Mongolia",
+      "weight": 1
+    },
+    {
+      "source": "Turkey",
+      "target": "Greece",
+      "weight": 1
+    },
+    {
+      "source": "Turkey",
+      "target": "Ireland",
+      "weight": 1
+    },
+    {
+      "source": "Portugal",
+      "target": "Denmark",
+      "weight": 1
+    },
+    {
+      "source": "Portugal",
+      "target": "Indonesia",
+      "weight": 1
+    },
+    {
+      "source": "Portugal",
+      "target": "Netherlands",
+      "weight": 2
+    },
+    {
+      "source": "Portugal",
+      "target": "Bulgaria",
+      "weight": 1
+    },
+    {
+      "source": "Portugal",
+      "target": "Germany",
+      "weight": 1
+    },
+    {
+      "source": "Portugal",
+      "target": "Italy",
+      "weight": 1
+    },
+    {
+      "source": "Portugal",
+      "target": "Spain",
+      "weight": 1
+    },
+    {
+      "source": "Portugal",
+      "target": "United Kingdom",
+      "weight": 1
+    },
+    {
+      "source": "Portugal",
+      "target": "Belgium",
+      "weight": 1
+    },
+    {
+      "source": "Portugal",
+      "target": "Ireland",
+      "weight": 1
+    },
+    {
+      "source": "Portugal",
+      "target": "Poland",
+      "weight": 1
+    },
+    {
+      "source": "Portugal",
+      "target": "Brazil",
+      "weight": 1
+    },
+    {
+      "source": "Australia",
+      "target": "Greece",
+      "weight": 1
+    },
+    {
+      "source": "Australia",
+      "target": "Malaysia",
+      "weight": 1
+    },
+    {
+      "source": "Australia",
+      "target": "Japan",
+      "weight": 1
+    },
+    {
+      "source": "Australia",
+      "target": "United Arab Emirates",
+      "weight": 1
+    },
+    {
+      "source": "Australia",
+      "target": "Austria",
+      "weight": 2
+    },
+    {
+      "source": "Australia",
+      "target": "Finland",
+      "weight": 1
+    },
+    {
+      "source": "Australia",
+      "target": "Denmark",
+      "weight": 1
+    },
+    {
+      "source": "Australia",
+      "target": "United Kingdom",
+      "weight": 3
+    },
+    {
+      "source": "Australia",
+      "target": "Italy",
+      "weight": 1
+    },
+    {
+      "source": "Norway",
+      "target": "Germany",
+      "weight": 1
+    },
+    {
+      "source": "Norway",
+      "target": "Spain",
+      "weight": 3
+    },
+    {
+      "source": "Norway",
+      "target": "United Kingdom",
+      "weight": 3
+    },
+    {
+      "source": "Norway",
+      "target": "Sweden",
+      "weight": 1
+    },
+    {
+      "source": "Norway",
+      "target": "Iceland",
+      "weight": 1
+    },
+    {
+      "source": "Norway",
+      "target": "Switzerland",
+      "weight": 1
+    },
+    {
+      "source": "Norway",
+      "target": "Greece",
+      "weight": 1
+    },
+    {
+      "source": "Ukraine",
+      "target": "Iraq",
+      "weight": 1
+    },
+    {
+      "source": "Ukraine",
+      "target": "United Kingdom",
+      "weight": 1
+    },
+    {
+      "source": "Ukraine",
+      "target": "Spain",
+      "weight": 1
+    },
+    {
+      "source": "China",
+      "target": "Spain",
+      "weight": 1
+    },
+    {
+      "source": "China",
+      "target": "Hong Kong",
+      "weight": 1
+    },
+    {
+      "source": "China",
+      "target": "Thailand",
+      "weight": 1
+    },
+    {
+      "source": "China",
+      "target": "United Kingdom",
+      "weight": 1
+    },
+    {
+      "source": "China",
+      "target": "Pakistan",
+      "weight": 1
+    },
+    {
+      "source": "China",
+      "target": "Saudi Arabia",
+      "weight": 1
+    },
+    {
+      "source": "China",
+      "target": "Malaysia",
+      "weight": 1
+    },
+    {
+      "source": "China",
+      "target": "Sweden",
+      "weight": 1
+    },
+    {
+      "source": "China",
+      "target": "Singapore",
+      "weight": 1
+    },
+    {
+      "source": "Spain",
+      "target": "Germany",
+      "weight": 2
+    },
+    {
+      "source": "Spain",
+      "target": "United Kingdom",
+      "weight": 3
+    },
+    {
+      "source": "Spain",
+      "target": "Iran, Islamic Republic of",
+      "weight": 1
+    },
+    {
+      "source": "Spain",
+      "target": "Ecuador",
+      "weight": 3
+    },
+    {
+      "source": "Spain",
+      "target": "Morocco",
+      "weight": 1
+    },
+    {
+      "source": "Spain",
+      "target": "Argentina",
+      "weight": 1
+    },
+    {
+      "source": "Spain",
+      "target": "Bulgaria",
+      "weight": 1
+    },
+    {
+      "source": "Spain",
+      "target": "Italy",
+      "weight": 1
+    },
+    {
+      "source": "Spain",
+      "target": "Netherlands",
+      "weight": 1
+    },
+    {
+      "source": "Spain",
+      "target": "Mexico",
+      "weight": 1
+    },
+    {
+      "source": "Spain",
+      "target": "Canada",
+      "weight": 1
+    },
+    {
+      "source": "Spain",
+      "target": "Brazil",
+      "weight": 1
+    },
+    {
+      "source": "Spain",
+      "target": "Peru",
+      "weight": 1
+    },
+    {
+      "source": "Spain",
+      "target": "Colombia",
+      "weight": 1
+    },
+    {
+      "source": "Spain",
+      "target": "Romania",
+      "weight": 1
+    },
+    {
+      "source": "Malaysia",
+      "target": "Indonesia",
+      "weight": 3
+    },
+    {
+      "source": "Malaysia",
+      "target": "Bahrain",
+      "weight": 1
+    },
+    {
+      "source": "Malaysia",
+      "target": "Germany",
+      "weight": 1
+    },
+    {
+      "source": "Malaysia",
+      "target": "Iraq",
+      "weight": 1
+    },
+    {
+      "source": "Malaysia",
+      "target": "Libya",
+      "weight": 1
+    },
+    {
+      "source": "Malaysia",
+      "target": "Ghana",
+      "weight": 1
+    },
+    {
+      "source": "Malaysia",
+      "target": "United Kingdom",
+      "weight": 3
+    },
+    {
+      "source": "Malaysia",
+      "target": "Finland",
+      "weight": 1
+    },
+    {
+      "source": "Malaysia",
+      "target": "Saudi Arabia",
+      "weight": 1
+    },
+    {
+      "source": "Malaysia",
+      "target": "Poland",
+      "weight": 1
+    },
+    {
+      "source": "Canada",
+      "target": "Italy",
+      "weight": 2
+    },
+    {
+      "source": "Canada",
+      "target": "Saudi Arabia",
+      "weight": 1
+    },
+    {
+      "source": "Canada",
+      "target": "United Kingdom",
+      "weight": 1
+    },
+    {
+      "source": "Canada",
+      "target": "Tunisia",
+      "weight": 2
+    },
+    {
+      "source": "Canada",
+      "target": "Mexico",
+      "weight": 1
+    },
+    {
+      "source": "Germany",
+      "target": "Bahrain",
+      "weight": 1
+    },
+    {
+      "source": "Germany",
+      "target": "Iraq",
+      "weight": 1
+    },
+    {
+      "source": "Germany",
+      "target": "Libya",
+      "weight": 1
+    },
+    {
+      "source": "Germany",
+      "target": "United Kingdom",
+      "weight": 5
+    },
+    {
+      "source": "Germany",
+      "target": "Denmark",
+      "weight": 2
+    },
+    {
+      "source": "Germany",
+      "target": "Finland",
+      "weight": 1
+    },
+    {
+      "source": "Germany",
+      "target": "Italy",
+      "weight": 3
+    },
+    {
+      "source": "Germany",
+      "target": "Netherlands",
+      "weight": 4
+    },
+    {
+      "source": "Germany",
+      "target": "Poland",
+      "weight": 1
+    },
+    {
+      "source": "Germany",
+      "target": "Romania",
+      "weight": 1
+    },
+    {
+      "source": "Germany",
+      "target": "Switzerland",
+      "weight": 1
+    },
+    {
+      "source": "Germany",
+      "target": "Austria",
+      "weight": 1
+    },
+    {
+      "source": "Germany",
+      "target": "Hungary",
+      "weight": 1
+    },
+    {
+      "source": "Germany",
+      "target": "South Africa",
+      "weight": 1
+    },
+    {
+      "source": "Germany",
+      "target": "Bulgaria",
+      "weight": 1
+    },
+    {
+      "source": "Germany",
+      "target": "Croatia",
+      "weight": 1
+    },
+    {
+      "source": "Germany",
+      "target": "Greece",
+      "weight": 1
+    },
+    {
+      "source": "Indonesia",
+      "target": "Brunei Darussalam",
+      "weight": 2
+    },
+    {
+      "source": "Indonesia",
+      "target": "Japan",
+      "weight": 1
+    },
+    {
+      "source": "Indonesia",
+      "target": "United Kingdom",
+      "weight": 2
+    },
+    {
+      "source": "Indonesia",
+      "target": "Netherlands",
+      "weight": 1
+    },
+    {
+      "source": "Indonesia",
+      "target": "Saudi Arabia",
+      "weight": 1
+    },
+    {
+      "source": "Indonesia",
+      "target": "Poland",
+      "weight": 1
+    },
+    {
+      "source": "United Kingdom",
+      "target": "Denmark",
+      "weight": 1
+    },
+    {
+      "source": "United Kingdom",
+      "target": "Finland",
+      "weight": 2
+    },
+    {
+      "source": "United Kingdom",
+      "target": "Italy",
+      "weight": 5
+    },
+    {
+      "source": "United Kingdom",
+      "target": "Netherlands",
+      "weight": 4
+    },
+    {
+      "source": "United Kingdom",
+      "target": "Poland",
+      "weight": 2
+    },
+    {
+      "source": "United Kingdom",
+      "target": "Romania",
+      "weight": 2
+    },
+    {
+      "source": "United Kingdom",
+      "target": "Switzerland",
+      "weight": 1
+    },
+    {
+      "source": "United Kingdom",
+      "target": "New Zealand",
+      "weight": 2
+    },
+    {
+      "source": "United Kingdom",
+      "target": "Austria",
+      "weight": 2
+    },
+    {
+      "source": "United Kingdom",
+      "target": "Bulgaria",
+      "weight": 1
+    },
+    {
+      "source": "United Kingdom",
+      "target": "Russian Federation",
+      "weight": 2
+    },
+    {
+      "source": "United Kingdom",
+      "target": "Brazil",
+      "weight": 2
+    },
+    {
+      "source": "United Kingdom",
+      "target": "Croatia",
+      "weight": 1
+    },
+    {
+      "source": "United Kingdom",
+      "target": "Greece",
+      "weight": 2
+    },
+    {
+      "source": "United Kingdom",
+      "target": "Nepal",
+      "weight": 1
+    },
+    {
+      "source": "United Kingdom",
+      "target": "Sweden",
+      "weight": 2
+    },
+    {
+      "source": "Estonia",
+      "target": "Japan",
+      "weight": 1
+    },
+    {
+      "source": "Estonia",
+      "target": "Sweden",
+      "weight": 1
+    },
+    {
+      "source": "Japan",
+      "target": "Finland",
+      "weight": 1
+    },
+    {
+      "source": "Japan",
+      "target": "Taiwan",
+      "weight": 1
+    },
+    {
+      "source": "Japan",
+      "target": "Sweden",
+      "weight": 1
+    },
+    {
+      "source": "Japan",
+      "target": "United Arab Emirates",
+      "weight": 1
+    },
+    {
+      "source": "Brazil",
+      "target": "Colombia",
+      "weight": 1
+    },
+    {
+      "source": "Brazil",
+      "target": "Sweden",
+      "weight": 1
+    },
+    {
+      "source": "France",
+      "target": "Austria",
+      "weight": 1
+    },
+    {
+      "source": "Serbia",
+      "target": "Belgium",
+      "weight": 1
+    },
+    {
+      "source": "Serbia",
+      "target": "Hungary",
+      "weight": 1
+    },
+    {
+      "source": "New Zealand",
+      "target": "Singapore",
+      "weight": 1
+    },
+    {
+      "source": "New Zealand",
+      "target": "Austria",
+      "weight": 1
+    },
+    {
+      "source": "New Zealand",
+      "target": "Finland",
+      "weight": 1
+    },
+    {
+      "source": "Colombia",
+      "target": "Pakistan",
+      "weight": 1
+    },
+    {
+      "source": "Colombia",
+      "target": "Romania",
+      "weight": 1
+    },
+    {
+      "source": "Belgium",
+      "target": "Finland",
+      "weight": 1
+    },
+    {
+      "source": "Belgium",
+      "target": "Lithuania",
+      "weight": 1
+    },
+    {
+      "source": "Belgium",
+      "target": "Ireland",
+      "weight": 1
+    },
+    {
+      "source": "Belgium",
+      "target": "Poland",
+      "weight": 1
+    },
+    {
+      "source": "Finland",
+      "target": "Denmark",
+      "weight": 1
+    },
+    {
+      "source": "Finland",
+      "target": "Italy",
+      "weight": 2
+    },
+    {
+      "source": "Finland",
+      "target": "Netherlands",
+      "weight": 2
+    },
+    {
+      "source": "Finland",
+      "target": "Poland",
+      "weight": 1
+    },
+    {
+      "source": "Finland",
+      "target": "Romania",
+      "weight": 1
+    },
+    {
+      "source": "Finland",
+      "target": "Switzerland",
+      "weight": 1
+    },
+    {
+      "source": "Finland",
+      "target": "Croatia",
+      "weight": 1
+    },
+    {
+      "source": "Finland",
+      "target": "Malta",
+      "weight": 1
+    },
+    {
+      "source": "Finland",
+      "target": "Austria",
+      "weight": 2
+    },
+    {
+      "source": "Sweden",
+      "target": "Switzerland",
+      "weight": 1
+    },
+    {
+      "source": "Sweden",
+      "target": "Greece",
+      "weight": 1
+    },
+    {
+      "source": "Sweden",
+      "target": "Russian Federation",
+      "weight": 1
+    },
+    {
+      "source": "Italy",
+      "target": "Denmark",
+      "weight": 1
+    },
+    {
+      "source": "Italy",
+      "target": "Netherlands",
+      "weight": 5
+    },
+    {
+      "source": "Italy",
+      "target": "Poland",
+      "weight": 1
+    },
+    {
+      "source": "Italy",
+      "target": "Romania",
+      "weight": 2
+    },
+    {
+      "source": "Italy",
+      "target": "Switzerland",
+      "weight": 1
+    },
+    {
+      "source": "Italy",
+      "target": "Bulgaria",
+      "weight": 1
+    },
+    {
+      "source": "Italy",
+      "target": "Greece",
+      "weight": 1
+    },
+    {
+      "source": "Italy",
+      "target": "Austria",
+      "weight": 1
+    },
+    {
+      "source": "Macao",
+      "target": "Taiwan",
+      "weight": 1
+    },
+    {
+      "source": "Taiwan",
+      "target": "Vietnam",
+      "weight": 1
+    },
+    {
+      "source": "Bulgaria",
+      "target": "Latvia",
+      "weight": 1
+    },
+    {
+      "source": "Bulgaria",
+      "target": "Netherlands",
+      "weight": 1
+    },
+    {
+      "source": "Romania",
+      "target": "Denmark",
+      "weight": 1
+    },
+    {
+      "source": "Romania",
+      "target": "Netherlands",
+      "weight": 2
+    },
+    {
+      "source": "Romania",
+      "target": "Poland",
+      "weight": 1
+    },
+    {
+      "source": "Romania",
+      "target": "Switzerland",
+      "weight": 1
+    },
+    {
+      "source": "Romania",
+      "target": "Pakistan",
+      "weight": 1
+    },
+    {
+      "source": "Chile",
+      "target": "Ecuador",
+      "weight": 2
+    },
+    {
+      "source": "Malta",
+      "target": "Croatia",
+      "weight": 1
+    },
+    {
+      "source": "Malta",
+      "target": "Netherlands",
+      "weight": 1
+    },
+    {
+      "source": "Austria",
+      "target": "Denmark",
+      "weight": 1
+    },
+    {
+      "source": "Austria",
+      "target": "Argentina",
+      "weight": 1
+    },
+    {
+      "source": "Austria",
+      "target": "Netherlands",
+      "weight": 1
+    },
+    {
+      "source": "Greece",
+      "target": "Croatia",
+      "weight": 1
+    },
+    {
+      "source": "Greece",
+      "target": "Netherlands",
+      "weight": 1
+    },
+    {
+      "source": "Greece",
+      "target": "Denmark",
+      "weight": 1
+    },
+    {
+      "source": "Greece",
+      "target": "Russian Federation",
+      "weight": 1
+    },
+    {
+      "source": "Bahrain",
+      "target": "Iraq",
+      "weight": 1
+    },
+    {
+      "source": "Bahrain",
+      "target": "Libya",
+      "weight": 1
+    },
+    {
+      "source": "Iraq",
+      "target": "Libya",
+      "weight": 1
+    },
+    {
+      "source": "Ireland",
+      "target": "Saudi Arabia",
+      "weight": 1
+    },
+    {
+      "source": "Ireland",
+      "target": "Poland",
+      "weight": 1
+    },
+    {
+      "source": "Netherlands",
+      "target": "Denmark",
+      "weight": 1
+    },
+    {
+      "source": "Netherlands",
+      "target": "Poland",
+      "weight": 1
+    },
+    {
+      "source": "Netherlands",
+      "target": "Switzerland",
+      "weight": 1
+    },
+    {
+      "source": "Netherlands",
+      "target": "Croatia",
+      "weight": 2
+    },
+    {
+      "source": "Poland",
+      "target": "Denmark",
+      "weight": 1
+    },
+    {
+      "source": "Poland",
+      "target": "Switzerland",
+      "weight": 1
+    },
+    {
+      "source": "Saudi Arabia",
+      "target": "Pakistan",
+      "weight": 1
+    },
+    {
+      "source": "Denmark",
+      "target": "Switzerland",
+      "weight": 1
+    }
+  ],
+  "collaboration_nodes": [
+    "United States",
+    "Turkey",
+    "Portugal",
+    "Australia",
+    "Norway",
+    "Ukraine",
+    "China",
+    "Spain",
+    "India",
+    "Malaysia",
+    "Canada",
+    "Germany",
+    "Indonesia",
+    "Philippines",
+    "United Kingdom",
+    "Morocco",
+    "Estonia",
+    "Japan",
+    "Brazil",
+    "France",
+    "South Africa",
+    "Korea, Republic of",
+    "Serbia",
+    "New Zealand",
+    "Singapore",
+    "Tunisia",
+    "Colombia",
+    "Belgium",
+    "Finland",
+    "Sweden",
+    "Hong Kong",
+    "Italy",
+    "Thailand",
+    "Macao",
+    "Taiwan",
+    "Bulgaria",
+    "Latvia",
+    "Romania",
+    "Chile",
+    "Ecuador",
+    "Malta",
+    "Austria",
+    "Greece",
+    "Bahrain",
+    "Iraq",
+    "Libya",
+    "Türkiye",
+    "Ireland",
+    "Russian Federation",
+    "Tanzania",
+    "Netherlands",
+    "Poland",
+    "Brunei Darussalam",
+    "Saudi Arabia",
+    "Denmark",
+    "Switzerland",
+    "Iran, Islamic Republic of",
+    "Jamaica",
+    "Slovakia",
+    "Pakistan",
+    "Croatia",
+    "Oman",
+    "Peru",
+    "Ghana",
+    "Sri Lanka",
+    "Hungary",
+    "Devon Energy",
+    "Egypt",
+    "Trinidad and Tobago",
+    "Mexico",
+    "United Arab Emirates",
+    "Bangladesh",
+    "Slovenia",
+    "Cyprus",
+    "Vietnam",
+    "North Macedonia",
+    "Argentina",
+    "Iceland",
+    "Czechia",
+    "Qatar",
+    "Bosnia and Herzegovina",
+    "Lithuania",
+    "Nepal",
+    "Honduras",
+    "Mongolia",
+    "Puerto Rico",
+    "Panama",
+    "Israel"
+  ]
+}

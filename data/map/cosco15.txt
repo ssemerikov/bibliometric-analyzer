@@ -1,0 +1,4 @@
+﻿id	label	x	y	cluster	weight<Links>	weight<Total link strength>	weight<Documents>	weight<Citations>	weight<Norm. citations>	score<Avg. pub. year>	score<Avg. citations>	score<Avg. norm. citations>
+55	"faculty of computer science and information technology, universiti tun hussein onn malaysia, batu pahat, johor, malaysia"	-0.131	0.5619	1	2	12	1	21	1.3125	2017	21	1.3125
+111	"universiti teknologi malaysia, johor bahru, johor, malaysia"	-0.4219	-0.3942	1	2	12	1	21	1.3125	2017	21	1.3125
+114	"university of south australia, adelaide, sa, australia"	0.5529	-0.1677	1	2	12	1	21	1.3125	2017	21	1.3125

@@ -1,0 +1,607 @@
+{
+  "top_sources": [
+    [
+      "Proceedings of the European Conference on Games-based Learning",
+      67
+    ],
+    [
+      "ACM International Conference Proceeding Series",
+      54
+    ],
+    [
+      "Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)",
+      49
+    ],
+    [
+      "Proceedings - Frontiers in Education Conference, FIE",
+      39
+    ],
+    [
+      "Lecture Notes in Networks and Systems",
+      31
+    ],
+    [
+      "Communications in Computer and Information Science",
+      28
+    ],
+    [
+      "ASEE Annual Conference and Exposition, Conference Proceedings",
+      27
+    ],
+    [
+      "Annual Conference on Innovation and Technology in Computer Science Education, ITiCSE",
+      17
+    ],
+    [
+      "CEUR Workshop Proceedings",
+      16
+    ],
+    [
+      "Advances in Intelligent Systems and Computing",
+      13
+    ]
+  ],
+  "top_authors": [
+    [
+      "Wang A.I.",
+      10
+    ],
+    [
+      "Barnes T.",
+      10
+    ],
+    [
+      "Shabalina O.",
+      9
+    ],
+    [
+      "Kultima A.",
+      8
+    ],
+    [
+      "Fernández-Manjón B.",
+      8
+    ],
+    [
+      "Wu B.",
+      8
+    ],
+    [
+      "Torrente J.",
+      8
+    ],
+    [
+      "Göbel S.",
+      7
+    ],
+    [
+      "Fowler A.",
+      7
+    ],
+    [
+      "Reng L.",
+      7
+    ]
+  ],
+  "top_keywords": [
+    [
+      "game development",
+      281
+    ],
+    [
+      "serious games",
+      150
+    ],
+    [
+      "education",
+      116
+    ],
+    [
+      "game-based learning",
+      114
+    ],
+    [
+      "game design",
+      88
+    ],
+    [
+      "gamification",
+      81
+    ],
+    [
+      "educational games",
+      62
+    ],
+    [
+      "games",
+      57
+    ],
+    [
+      "serious game",
+      53
+    ],
+    [
+      "higher education",
+      40
+    ]
+  ],
+  "source_keyword_flows": [
+    {
+      "source": "ACM International Conference Proceeding Series",
+      "keyword": "game development",
+      "weight": 14
+    },
+    {
+      "source": "Proceedings of the European Conference on Games-based Learning",
+      "keyword": "game-based learning",
+      "weight": 14
+    },
+    {
+      "source": "Proceedings of the European Conference on Games-based Learning",
+      "keyword": "game development",
+      "weight": 12
+    },
+    {
+      "source": "Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)",
+      "keyword": "game development",
+      "weight": 11
+    },
+    {
+      "source": "Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)",
+      "keyword": "serious games",
+      "weight": 11
+    },
+    {
+      "source": "Proceedings - Frontiers in Education Conference, FIE",
+      "keyword": "game development",
+      "weight": 10
+    },
+    {
+      "source": "Proceedings of the European Conference on Games-based Learning",
+      "keyword": "serious games",
+      "weight": 8
+    },
+    {
+      "source": "CEUR Workshop Proceedings",
+      "keyword": "game development",
+      "weight": 7
+    },
+    {
+      "source": "Proceedings of the European Conference on Games-based Learning",
+      "keyword": "educational games",
+      "weight": 6
+    },
+    {
+      "source": "Proceedings of the European Conference on Games-based Learning",
+      "keyword": "game design",
+      "weight": 6
+    },
+    {
+      "source": "Annual Conference on Innovation and Technology in Computer Science Education, ITiCSE",
+      "keyword": "game development",
+      "weight": 6
+    },
+    {
+      "source": "ACM International Conference Proceeding Series",
+      "keyword": "game design",
+      "weight": 5
+    },
+    {
+      "source": "Proceedings of the European Conference on Games-based Learning",
+      "keyword": "gamification",
+      "weight": 5
+    },
+    {
+      "source": "Communications in Computer and Information Science",
+      "keyword": "serious games",
+      "weight": 5
+    },
+    {
+      "source": "Lecture Notes in Networks and Systems",
+      "keyword": "game development",
+      "weight": 5
+    },
+    {
+      "source": "Lecture Notes in Networks and Systems",
+      "keyword": "education",
+      "weight": 4
+    },
+    {
+      "source": "Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)",
+      "keyword": "gamification",
+      "weight": 4
+    },
+    {
+      "source": "Proceedings - Frontiers in Education Conference, FIE",
+      "keyword": "game design",
+      "weight": 4
+    },
+    {
+      "source": "Proceedings of the European Conference on Games-based Learning",
+      "keyword": "education",
+      "weight": 3
+    },
+    {
+      "source": "Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)",
+      "keyword": "serious game",
+      "weight": 3
+    },
+    {
+      "source": "ACM International Conference Proceeding Series",
+      "keyword": "serious games",
+      "weight": 3
+    },
+    {
+      "source": "Proceedings of the European Conference on Games-based Learning",
+      "keyword": "serious game",
+      "weight": 3
+    },
+    {
+      "source": "Lecture Notes in Networks and Systems",
+      "keyword": "serious game",
+      "weight": 3
+    },
+    {
+      "source": "ACM International Conference Proceeding Series",
+      "keyword": "serious game",
+      "weight": 3
+    },
+    {
+      "source": "Proceedings of the European Conference on Games-based Learning",
+      "keyword": "higher education",
+      "weight": 3
+    },
+    {
+      "source": "ACM International Conference Proceeding Series",
+      "keyword": "education",
+      "weight": 3
+    },
+    {
+      "source": "Advances in Intelligent Systems and Computing",
+      "keyword": "game-based learning",
+      "weight": 3
+    },
+    {
+      "source": "Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)",
+      "keyword": "education",
+      "weight": 3
+    },
+    {
+      "source": "CEUR Workshop Proceedings",
+      "keyword": "serious games",
+      "weight": 3
+    },
+    {
+      "source": "Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)",
+      "keyword": "educational games",
+      "weight": 3
+    },
+    {
+      "source": "Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)",
+      "keyword": "game design",
+      "weight": 3
+    },
+    {
+      "source": "Lecture Notes in Networks and Systems",
+      "keyword": "game design",
+      "weight": 2
+    },
+    {
+      "source": "CEUR Workshop Proceedings",
+      "keyword": "game design",
+      "weight": 2
+    },
+    {
+      "source": "CEUR Workshop Proceedings",
+      "keyword": "serious game",
+      "weight": 2
+    },
+    {
+      "source": "ACM International Conference Proceeding Series",
+      "keyword": "games",
+      "weight": 2
+    },
+    {
+      "source": "Proceedings - Frontiers in Education Conference, FIE",
+      "keyword": "game-based learning",
+      "weight": 2
+    },
+    {
+      "source": "ACM International Conference Proceeding Series",
+      "keyword": "educational games",
+      "weight": 2
+    },
+    {
+      "source": "CEUR Workshop Proceedings",
+      "keyword": "educational games",
+      "weight": 2
+    },
+    {
+      "source": "Communications in Computer and Information Science",
+      "keyword": "education",
+      "weight": 2
+    },
+    {
+      "source": "Communications in Computer and Information Science",
+      "keyword": "game development",
+      "weight": 2
+    },
+    {
+      "source": "Communications in Computer and Information Science",
+      "keyword": "games",
+      "weight": 2
+    },
+    {
+      "source": "Proceedings - Frontiers in Education Conference, FIE",
+      "keyword": "serious games",
+      "weight": 2
+    },
+    {
+      "source": "Advances in Intelligent Systems and Computing",
+      "keyword": "gamification",
+      "weight": 2
+    },
+    {
+      "source": "Advances in Intelligent Systems and Computing",
+      "keyword": "game development",
+      "weight": 2
+    },
+    {
+      "source": "Proceedings - Frontiers in Education Conference, FIE",
+      "keyword": "games",
+      "weight": 2
+    },
+    {
+      "source": "Advances in Intelligent Systems and Computing",
+      "keyword": "game design",
+      "weight": 2
+    },
+    {
+      "source": "Annual Conference on Innovation and Technology in Computer Science Education, ITiCSE",
+      "keyword": "education",
+      "weight": 2
+    },
+    {
+      "source": "CEUR Workshop Proceedings",
+      "keyword": "gamification",
+      "weight": 2
+    },
+    {
+      "source": "Communications in Computer and Information Science",
+      "keyword": "game-based learning",
+      "weight": 2
+    },
+    {
+      "source": "Proceedings of the European Conference on Games-based Learning",
+      "keyword": "games",
+      "weight": 2
+    },
+    {
+      "source": "CEUR Workshop Proceedings",
+      "keyword": "game-based learning",
+      "weight": 1
+    },
+    {
+      "source": "Lecture Notes in Networks and Systems",
+      "keyword": "game-based learning",
+      "weight": 1
+    },
+    {
+      "source": "Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)",
+      "keyword": "higher education",
+      "weight": 1
+    },
+    {
+      "source": "Communications in Computer and Information Science",
+      "keyword": "gamification",
+      "weight": 1
+    },
+    {
+      "source": "Proceedings - Frontiers in Education Conference, FIE",
+      "keyword": "higher education",
+      "weight": 1
+    },
+    {
+      "source": "ACM International Conference Proceeding Series",
+      "keyword": "game-based learning",
+      "weight": 1
+    },
+    {
+      "source": "Lecture Notes in Networks and Systems",
+      "keyword": "gamification",
+      "weight": 1
+    },
+    {
+      "source": "Communications in Computer and Information Science",
+      "keyword": "game design",
+      "weight": 1
+    },
+    {
+      "source": "Communications in Computer and Information Science",
+      "keyword": "higher education",
+      "weight": 1
+    },
+    {
+      "source": "Advances in Intelligent Systems and Computing",
+      "keyword": "serious games",
+      "weight": 1
+    }
+  ],
+  "author_keyword_flows": [
+    {
+      "author": "Barnes T.",
+      "keyword": "education",
+      "weight": 8
+    },
+    {
+      "author": "Barnes T.",
+      "keyword": "game development",
+      "weight": 8
+    },
+    {
+      "author": "Kultima A.",
+      "keyword": "game development",
+      "weight": 5
+    },
+    {
+      "author": "Fowler A.",
+      "keyword": "game development",
+      "weight": 4
+    },
+    {
+      "author": "Göbel S.",
+      "keyword": "serious games",
+      "weight": 3
+    },
+    {
+      "author": "Reng L.",
+      "keyword": "game development",
+      "weight": 3
+    },
+    {
+      "author": "Fowler A.",
+      "keyword": "game design",
+      "weight": 3
+    },
+    {
+      "author": "Torrente J.",
+      "keyword": "educational games",
+      "weight": 3
+    },
+    {
+      "author": "Fernández-Manjón B.",
+      "keyword": "educational games",
+      "weight": 3
+    },
+    {
+      "author": "Göbel S.",
+      "keyword": "educational games",
+      "weight": 2
+    },
+    {
+      "author": "Fernández-Manjón B.",
+      "keyword": "game-based learning",
+      "weight": 2
+    },
+    {
+      "author": "Fowler A.",
+      "keyword": "education",
+      "weight": 2
+    },
+    {
+      "author": "Kultima A.",
+      "keyword": "games",
+      "weight": 2
+    },
+    {
+      "author": "Shabalina O.",
+      "keyword": "educational games",
+      "weight": 2
+    },
+    {
+      "author": "Torrente J.",
+      "keyword": "games",
+      "weight": 2
+    },
+    {
+      "author": "Fernández-Manjón B.",
+      "keyword": "games",
+      "weight": 2
+    },
+    {
+      "author": "Torrente J.",
+      "keyword": "serious games",
+      "weight": 2
+    },
+    {
+      "author": "Fernández-Manjón B.",
+      "keyword": "serious games",
+      "weight": 2
+    },
+    {
+      "author": "Göbel S.",
+      "keyword": "education",
+      "weight": 1
+    },
+    {
+      "author": "Göbel S.",
+      "keyword": "game design",
+      "weight": 1
+    },
+    {
+      "author": "Fernández-Manjón B.",
+      "keyword": "game development",
+      "weight": 1
+    },
+    {
+      "author": "Fernández-Manjón B.",
+      "keyword": "game design",
+      "weight": 1
+    },
+    {
+      "author": "Reng L.",
+      "keyword": "game-based learning",
+      "weight": 1
+    },
+    {
+      "author": "Kultima A.",
+      "keyword": "serious games",
+      "weight": 1
+    },
+    {
+      "author": "Göbel S.",
+      "keyword": "serious game",
+      "weight": 1
+    },
+    {
+      "author": "Wu B.",
+      "keyword": "higher education",
+      "weight": 1
+    },
+    {
+      "author": "Wang A.I.",
+      "keyword": "higher education",
+      "weight": 1
+    },
+    {
+      "author": "Göbel S.",
+      "keyword": "game development",
+      "weight": 1
+    },
+    {
+      "author": "Göbel S.",
+      "keyword": "gamification",
+      "weight": 1
+    },
+    {
+      "author": "Torrente J.",
+      "keyword": "game-based learning",
+      "weight": 1
+    },
+    {
+      "author": "Barnes T.",
+      "keyword": "serious games",
+      "weight": 1
+    },
+    {
+      "author": "Shabalina O.",
+      "keyword": "game-based learning",
+      "weight": 1
+    },
+    {
+      "author": "Shabalina O.",
+      "keyword": "games",
+      "weight": 1
+    },
+    {
+      "author": "Wang A.I.",
+      "keyword": "education",
+      "weight": 1
+    },
+    {
+      "author": "Wang A.I.",
+      "keyword": "game development",
+      "weight": 1
+    }
+  ]
+}

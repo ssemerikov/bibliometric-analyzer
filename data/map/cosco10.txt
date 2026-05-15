@@ -1,0 +1,20 @@
+﻿id	label	x	y	cluster	weight<Links>	weight<Documents>	weight<Citations>	weight<Norm. citations>	score<Avg. pub. year>	score<Avg. citations>	score<Avg. norm. citations>
+2	"beijing institute of fashion technology, beijing, china"	0.8137	0.1278	1	0	1	23	2.5091	2018	23	2.5091
+7	"chitkara university, punjab, rajpura, pb, india"	0.6015	-0.565	2	0	2	27	5.5833	2023	13.5	2.7917
+9	"college of information engineering, nanchang institute of technology, nanchang, china"	0.6886	0.4622	3	0	1	11	1.5278	2022	11	1.5278
+13	"cslearn - educational technolgies, universität wien, vienna, vienna, austria"	-0.385	-0.1239	4	0	1	33	4.4815	2019	33	4.4815
+17	"department of applied informatics, university of macedonia, thessaloniki, central macedonia, greece"	-0.6833	-0.4742	5	0	1	11	2.8205	2021	11	2.8205
+21	"department of civil engineering, university of technology- iraq, baghdad, baghdad, iraq"	0.2394	0.326	6	0	1	11	1.4938	2019	11	1.4938
+30	"department of computer science, ithaca college, ithaca, ny, united states"	0.0586	0.819	7	0	2	64	3.8607	2016	32	1.9304
+43	"department of software engineering and artificial intelligence, universidad complutense de madrid, madrid, madrid, spain"	-0.4137	-0.7103	8	0	1	25	3.3951	2019	25	3.3951
+49	"entertainment technology center, carnegie mellon university, pittsburgh, pa, united states"	-0.2363	0.3283	9	0	2	33	2	2012.5	16.5	1
+55	"faculty of computer science and information technology, universiti tun hussein onn malaysia, batu pahat, johor, malaysia"	-0.7839	0.2421	10	0	1	21	1.3125	2017	21	1.3125
+76	"kryvyi rih state pedagogical university, kryvyi rih, dnipropetrovsk oblast, ukraine"	0.8023	-0.2462	11	0	2	10	13.8182	2024	5	6.9091
+77	"laboratory of human anatomy, college of medical, veterinary & life sciences, glasgow, scotland, united kingdom"	-0.0011	-0.4045	12	0	1	24	1	2012	24	1
+84	"msc in applied informatics, university of macedonia, thessaloniki, central macedonia, greece"	-0.0651	-0.8362	13	0	1	11	2.8205	2021	11	2.8205
+93	"school of computer science, pittsburgh, pa, united states"	-0.828	-0.1198	14	0	2	33	2	2012.5	16.5	1
+94	"school of computer science, university college dublin, dublin, leinster, ireland"	-0.2988	0.778	15	0	1	17	1.8545	2018	17	1.8545
+100	"the glasgow school of art, glasgow, scotland, united kingdom"	0.3084	-0.768	16	0	1	24	1	2012	24	1
+111	"universiti teknologi malaysia, johor bahru, johor, malaysia"	0.3841	-0.1266	17	0	1	21	1.3125	2017	21	1.3125
+114	"university of south australia, adelaide, sa, australia"	0.4151	0.728	18	0	1	21	1.3125	2017	21	1.3125
+122	"western michigan university’s college of engineering and applied sciences, kalamazoo, mi, united states"	-0.6167	0.5635	19	0	1	11	1.4938	2019	11	1.4938

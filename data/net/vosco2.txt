@@ -1,0 +1,5 @@
+﻿id	label	x	y	cluster	weight<Links>	weight<Total link strength>	weight<Documents>	weight<Citations>	weight<Norm. citations>	score<Avg. pub. year>	score<Avg. citations>	score<Avg. norm. citations>
+79	"lodz university of technology, lodz, ld, poland"	-0.0215	0.6213	1	3	6	2	3	0.6517	2021.5	1.5	0.3259
+89	"politechnika koszalinska, koszalin, poland"	0.0214	-0.6201	1	3	6	2	3	0.6517	2021.5	1.5	0.3259
+103	"transition technologies sa, warsaw, poland"	-0.6212	-0.022	1	3	6	2	3	0.6517	2021.5	1.5	0.3259
+119	"utilitia/fundacja instytut rozwoju regionalnego, krakow, poland"	0.6213	0.0208	1	3	6	2	3	0.6517	2021.5	1.5	0.3259

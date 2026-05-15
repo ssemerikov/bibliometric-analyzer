@@ -1,0 +1,21 @@
+{
+  "total_transcripts": 5,
+  "total_messages": 1991,
+  "total_duration_minutes": 272.2166666666667,
+  "advisor_message_ratio": 0.4721245605223506,
+  "clusters_identified": 5,
+  "insights_extracted": 126,
+  "unique_themes": 18,
+  "top_themes": {
+    "ар": 180,
+    "вр": 87,
+    "гейм": 50,
+    "игры": 47,
+    "обучение": 43,
+    "юнити": 35,
+    "образование": 32,
+    "игра": 30,
+    "разработка": 27,
+    "юники": 23
+  }
+}

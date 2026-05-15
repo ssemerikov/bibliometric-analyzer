@@ -1,0 +1,153 @@
+{
+  "platform_scores": {
+    "unity": {
+      "n_docs": 97,
+      "rogers_relative_advantage": 0.027491408934707903,
+      "rogers_compatibility": 0.04029990627928772,
+      "rogers_low_complexity": 0.040206185567010305,
+      "rogers_trialability": 0.06300114547537228,
+      "rogers_observability": 0.05154639175257732,
+      "rogers_total": 0.22254503800895553,
+      "tam_perceived_usefulness": 0.07731958762886598,
+      "tam_perceived_ease_of_use": 0.04270986745213549,
+      "avg_pub_year": 2021.1649484536083,
+      "avg_citations": 5.010309278350515
+    },
+    "unreal": {
+      "n_docs": 22,
+      "rogers_relative_advantage": 0.04924242424242424,
+      "rogers_compatibility": 0.08677685950413222,
+      "rogers_low_complexity": 0.03181818181818182,
+      "rogers_trialability": 0.06565656565656566,
+      "rogers_observability": 0.045454545454545456,
+      "rogers_total": 0.27894857667584944,
+      "tam_perceived_usefulness": 0.07954545454545454,
+      "tam_perceived_ease_of_use": 0.025974025974025972,
+      "avg_pub_year": 2021.909090909091,
+      "avg_citations": 4.590909090909091
+    },
+    "unreal engine": {
+      "n_docs": 16,
+      "rogers_relative_advantage": 0.04166666666666667,
+      "rogers_compatibility": 0.09659090909090909,
+      "rogers_low_complexity": 0.03125,
+      "rogers_trialability": 0.0625,
+      "rogers_observability": 0.041666666666666664,
+      "rogers_total": 0.27367424242424243,
+      "tam_perceived_usefulness": 0.0625,
+      "tam_perceived_ease_of_use": 0.017857142857142856,
+      "avg_pub_year": 2023.0,
+      "avg_citations": 3.5
+    },
+    "godot": {
+      "n_docs": 3,
+      "rogers_relative_advantage": 0.027777777777777776,
+      "rogers_compatibility": 0.030303030303030304,
+      "rogers_low_complexity": 0.03333333333333333,
+      "rogers_trialability": 0.0,
+      "rogers_observability": 0.0,
+      "rogers_total": 0.09141414141414142,
+      "tam_perceived_usefulness": 0.041666666666666664,
+      "tam_perceived_ease_of_use": 0.0,
+      "avg_pub_year": 2024.6666666666667,
+      "avg_citations": 2.3333333333333335
+    },
+    "gamemaker": {
+      "n_docs": 3,
+      "rogers_relative_advantage": 0.0,
+      "rogers_compatibility": 0.06060606060606061,
+      "rogers_low_complexity": 0.0,
+      "rogers_trialability": 0.037037037037037035,
+      "rogers_observability": 0.037037037037037035,
+      "rogers_total": 0.13468013468013468,
+      "tam_perceived_usefulness": 0.125,
+      "tam_perceived_ease_of_use": 0.0,
+      "avg_pub_year": 2016.3333333333333,
+      "avg_citations": 3.6666666666666665
+    },
+    "construct": {
+      "n_docs": 27,
+      "rogers_relative_advantage": 0.021604938271604937,
+      "rogers_compatibility": 0.02356902356902357,
+      "rogers_low_complexity": 0.022222222222222227,
+      "rogers_trialability": 0.0411522633744856,
+      "rogers_observability": 0.012345679012345678,
+      "rogers_total": 0.120894126449682,
+      "tam_perceived_usefulness": 0.05092592592592592,
+      "tam_perceived_ease_of_use": 0.02645502645502645,
+      "avg_pub_year": 2019.4074074074074,
+      "avg_citations": 14.296296296296296
+    },
+    "roblox": {
+      "n_docs": 1,
+      "rogers_relative_advantage": 0.08333333333333333,
+      "rogers_compatibility": 0.0,
+      "rogers_low_complexity": 0.0,
+      "rogers_trialability": 0.1111111111111111,
+      "rogers_observability": 0.0,
+      "rogers_total": 0.19444444444444442,
+      "tam_perceived_usefulness": 0.25,
+      "tam_perceived_ease_of_use": 0.0,
+      "avg_pub_year": 2023.0,
+      "avg_citations": 22.0
+    },
+    "cocos2d": {
+      "n_docs": 1,
+      "rogers_relative_advantage": 0.16666666666666666,
+      "rogers_compatibility": 0.0,
+      "rogers_low_complexity": 0.0,
+      "rogers_trialability": 0.1111111111111111,
+      "rogers_observability": 0.0,
+      "rogers_total": 0.2777777777777778,
+      "tam_perceived_usefulness": 0.125,
+      "tam_perceived_ease_of_use": 0.0,
+      "avg_pub_year": 2011.0,
+      "avg_citations": 2.0
+    }
+  },
+  "h1_rogers_vs_centrality": {
+    "rho": NaN,
+    "n": 2,
+    "pairs": [
+      [
+        0.22254503800895553,
+        0.10064935064935066,
+        "unity"
+      ],
+      [
+        0.27367424242424243,
+        0.022727272727272728,
+        "unreal engine"
+      ]
+    ],
+    "note": "Too few platforms with corpus mentions AND graph nodes for correlation."
+  },
+  "h2_rogers_vs_year": {
+    "rho": -0.23952525238265177,
+    "n": 8,
+    "platforms": [
+      "unity",
+      "unreal",
+      "unreal engine",
+      "godot",
+      "gamemaker",
+      "construct",
+      "roblox",
+      "cocos2d"
+    ]
+  },
+  "h3_tam_vs_citations": {
+    "rho": 0.203596464525254,
+    "n": 8,
+    "platforms": [
+      "unity",
+      "unreal",
+      "unreal engine",
+      "godot",
+      "gamemaker",
+      "construct",
+      "roblox",
+      "cocos2d"
+    ]
+  }
+}

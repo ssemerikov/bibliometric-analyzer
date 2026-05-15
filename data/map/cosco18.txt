@@ -1,0 +1,7 @@
+﻿id	label	x	y	cluster	weight<Links>	weight<Total link strength>	weight<Citations>
+10	acm inroads	0.8915	-0.0663	1	2	2	2
+24	communications of the acm	0.8769	-0.1414	1	2	2	3
+48	ieee computer graphics and applications	-0.042	0.0428	2	5	6	4
+59	journal of engineering education	-0.0633	0.4166	2	1	1	2
+77	part f128680	-0.9037	-0.1387	3	2	2	2
+110	teaching computer graphics starting with shader-based opengl	-0.7594	-0.1131	3	2	3	2

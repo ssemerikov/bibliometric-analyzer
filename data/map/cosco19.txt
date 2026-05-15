@@ -1,0 +1,9 @@
+﻿id	label	x	y	cluster	weight<Links>	weight<Total link strength>	weight<Citations>
+34	angel	1.0812	0.0813	2	5	16	4
+35	annual conference on innovation and technology in computer science education	-0.1714	0.0492	1	7	17	3
+107	dickson	0.1048	-0.0492	1	7	17	3
+116	edward s.	1.0814	-0.0823	2	5	16	4
+132	fie	-1.0096	0.0823	1	5	14	6
+162	iticse	-0.0115	0.2923	1	7	17	3
+248	paul e.	-0.0651	-0.2924	1	7	17	3
+258	proceedings - frontiers in education conference	-1.0098	-0.0812	1	5	14	6

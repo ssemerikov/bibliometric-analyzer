@@ -1,0 +1,23 @@
+﻿id	label	x	y	cluster	weight<Links>	weight<Documents>	weight<Citations>	weight<Norm. citations>	score<Avg. pub. year>	score<Avg. citations>	score<Avg. norm. citations>
+4	"annual conference on innovation and technology in computer science education, iticse"	0.3715	0.194	1	0	4	67	5.3607	2017.25	16.75	1.3402
+5	applied sciences (switzerland)	0.7942	0.2811	2	0	2	5	3.75	2024.5	2.5	1.875
+6	"art, design and communication in higher education"	0.3529	-0.2242	3	0	1	23	2.5091	2018	23	2.5091
+7	"asee annual conference and exposition, conference proceedings"	-0.83	0.0407	4	0	2	3	1.1049	2022	1.5	0.5524
+8	biochemistry and molecular biology education	-0.3536	0.2247	5	0	1	6	1.5385	2021	6	1.5385
+9	ceur workshop proceedings	0.283	-0.7838	6	0	2	11	5.3182	2023.5	5.5	2.6591
+12	educational technology and society	-0.0177	-0.4176	7	0	1	25	3.3951	2019	25	3.3951
+13	entertainment computing	-0.5597	0.6235	8	0	1	11	2.8205	2021	11	2.8205
+15	"ieee conference on computatonal intelligence and games, cig"	-0.6187	-0.5656	9	0	2	3	1.2727	2020.5	1.5	0.6364
+16	"ieee consumer electronics society's international games innovations conference, igic"	-0.794	-0.2811	10	0	1	9	1	2013	9	1
+17	"ieee global engineering education conference, educon"	0.6187	0.5658	11	0	2	33	4.4815	2022	16.5	2.2407
+20	jmir formative research	0.0417	0.843	12	0	1	7	2.9697	2023	7	2.9697
+22	journal of physics: conference series	-0.2827	0.7838	13	0	5	10	11.719	2021.8	2	2.3438
+23	kn - journal of cartography and geographic information	-0.7629	0.3582	14	0	1	8	2.0513	2021	8	2.0513
+24	lecture notes in computer science	-0.0417	-0.8432	15	0	2	24	1	2017.5	12	0.5
+26	lecture notes in networks and systems	0.0177	0.4168	16	0	5	4	1.4116	2023.2	0.8	0.2823
+27	mechanisms and machine science	0.83	-0.0409	17	0	2	3	0.4074	2019	1.5	0.2037
+28	multimedia tools and applications	0.5597	-0.6233	18	0	1	5	2.1212	2023	5	2.1212
+30	procedia computer science	-0.3583	-0.7519	19	0	1	11	1.5278	2022	11	1.5278
+31	"procedia environmental science, engineering and management"	-0.3708	-0.1936	20	0	1	3	1.5	2020	3	1.5
+32	"proceedings - frontiers in education conference, fie"	0.358	0.752	21	0	3	14	2.7	2020.3333	4.6667	0.9
+36	"proceedings of the international conference on e-learning, icel"	0.7627	-0.3582	22	0	1	9	0.5143	2015	9	0.5143

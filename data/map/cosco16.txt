@@ -1,0 +1,12 @@
+﻿id	label	x	y	cluster	weight<Links>	weight<Total link strength>	weight<Documents>	weight<Citations>	weight<Norm. citations>	score<Avg. pub. year>	score<Avg. citations>	score<Avg. norm. citations>
+1	australia	-0.8106	-0.1039	1	5	18	2	27	2.851	2019	13.5	1.4255
+9	denmark	-0.7397	-0.1563	1	4	12	3	12	2.601	2020.6667	4	0.867
+10	ecuador	1.5539	-0.1671	3	1	10	2	7	2.9697	2024	3.5	1.4848
+11	germany	0.2601	0.0076	2	6	26	5	10	3.5513	2023.4	2	0.7103
+14	india	0.3129	0.2935	4	3	4	10	35	8.4639	2023.8	3.5	0.8464
+19	malaysia	-0.8402	-0.0216	1	2	7	2	23	2.3125	2018.5	11.5	1.1562
+25	russian federation	0.3347	0.3149	4	1	1	3	6	1.9074	2019.3333	2	0.6358
+27	slovakia	-0.5265	-0.1235	1	4	4	2	2	1.25	2022	1	0.625
+29	spain	1.3255	-0.1367	3	2	20	3	32	6.3648	2021.6667	10.6667	2.1216
+33	ukraine	-0.5949	0.0489	2	2	4	3	12	15.3182	2024	4	5.1061
+35	united states	-0.2751	0.0445	2	6	18	18	125	15.1011	2019.6111	6.9444	0.839

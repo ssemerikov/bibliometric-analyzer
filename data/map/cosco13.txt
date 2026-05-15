@@ -1,0 +1,5 @@
+﻿id	label	x	y	cluster	weight<Links>	weight<Total link strength>	weight<Documents>	weight<Citations>	weight<Norm. citations>	score<Avg. pub. year>	score<Avg. citations>	score<Avg. norm. citations>
+4	"annual conference on innovation and technology in computer science education, iticse"	0.4789	0	2	2	3	4	67	5.3607	2017.25	16.75	1.3402
+7	"asee annual conference and exposition, conference proceedings"	-0.7979	-0	1	1	1	2	3	1.1049	2022	1.5	0.5524
+9	ceur workshop proceedings	0.8616	-0	2	1	2	2	11	5.3182	2023.5	5.5	2.6591
+22	journal of physics: conference series	-0.5426	0	1	2	2	5	10	11.719	2021.8	2	2.3438

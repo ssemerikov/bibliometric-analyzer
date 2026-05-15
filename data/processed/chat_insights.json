@@ -1,0 +1,191 @@
+{
+  "clusters": [
+    {
+      "cluster_id": 1,
+      "color": "Red",
+      "keywords": [
+        "augmented reality",
+        "education",
+        "game development",
+        "serious game",
+        "unity 3d",
+        "virtual reality"
+      ],
+      "theme": "3D Immersive Technologies for Educational Game Development",
+      "description": "This cluster represents the intersection of immersive technologies (VR/AR) with educational game development using Unity3D as the primary tool.",
+      "advisor_insights": []
+    },
+    {
+      "cluster_id": 2,
+      "color": "Green",
+      "keywords": [
+        "game",
+        "gamification",
+        "motivation",
+        "unity",
+        "video game development"
+      ],
+      "theme": "General Game Development with Motivational Design",
+      "description": "This cluster focuses on general game development practices emphasizing gamification and player motivation.",
+      "advisor_insights": []
+    },
+    {
+      "cluster_id": 3,
+      "color": "Blue",
+      "keywords": [
+        "educational game",
+        "unity game engine"
+      ],
+      "theme": "Educational Game Development with Unity",
+      "description": "A focused cluster on creating educational games using the Unity game engine.",
+      "advisor_insights": []
+    },
+    {
+      "cluster_id": 4,
+      "color": "Yellow",
+      "keywords": [
+        "game design",
+        "game-based learning"
+      ],
+      "theme": "Game Design for Learning",
+      "description": "This cluster emphasizes the design aspects of game-based learning approaches.",
+      "advisor_insights": []
+    },
+    {
+      "cluster_id": 5,
+      "color": "Purple",
+      "keywords": [
+        "game ai",
+        "unity engine"
+      ],
+      "theme": "AI Integration in Game Engines",
+      "description": "This cluster represents the technical aspects of AI implementation in Unity-based games.",
+      "advisor_insights": []
+    }
+  ],
+  "discussion_points": [
+    {
+      "section": "6.1 Thematic Cluster Interpretations",
+      "title": "Cluster 1 (Red): 3D Immersive Technologies for Educational Game Development",
+      "content": "This cluster represents the intersection of immersive technologies (VR/AR) with educational game development using Unity3D as the primary tool.",
+      "supporting_quotes": [],
+      "keywords_mentioned": [
+        "augmented reality",
+        "education",
+        "game development",
+        "serious game",
+        "unity 3d",
+        "virtual reality"
+      ]
+    },
+    {
+      "section": "6.1 Thematic Cluster Interpretations",
+      "title": "Cluster 2 (Green): General Game Development with Motivational Design",
+      "content": "This cluster focuses on general game development practices emphasizing gamification and player motivation.",
+      "supporting_quotes": [],
+      "keywords_mentioned": [
+        "game",
+        "gamification",
+        "motivation",
+        "unity",
+        "video game development"
+      ]
+    },
+    {
+      "section": "6.1 Thematic Cluster Interpretations",
+      "title": "Cluster 3 (Blue): Educational Game Development with Unity",
+      "content": "A focused cluster on creating educational games using the Unity game engine.",
+      "supporting_quotes": [],
+      "keywords_mentioned": [
+        "educational game",
+        "unity game engine"
+      ]
+    },
+    {
+      "section": "6.1 Thematic Cluster Interpretations",
+      "title": "Cluster 4 (Yellow): Game Design for Learning",
+      "content": "This cluster emphasizes the design aspects of game-based learning approaches.",
+      "supporting_quotes": [],
+      "keywords_mentioned": [
+        "game design",
+        "game-based learning"
+      ]
+    },
+    {
+      "section": "6.1 Thematic Cluster Interpretations",
+      "title": "Cluster 5 (Purple): AI Integration in Game Engines",
+      "content": "This cluster represents the technical aspects of AI implementation in Unity-based games.",
+      "supporting_quotes": [],
+      "keywords_mentioned": [
+        "game ai",
+        "unity engine"
+      ]
+    },
+    {
+      "section": "6.2 Methodological Reflections",
+      "title": "Bibliometric Methodology",
+      "content": "The research methodology was developed through iterative discussions emphasizing reproducibility and systematic approaches to literature analysis.",
+      "supporting_quotes": [
+        "библиотекой отца вот видите вот десять источников например, По Этой фразе Гейм Девелопер Есть другие организации, например, такие как илие Институт электроради инженеров это тоже Считается специализир",
+        "только местечко нам было бы неплохо еще и целенаправленная процедура процедура которая выполняется для получения Соответствующего результата вы же Помните что Мы с вами говорили, о том что борщ Мы вар",
+        "Вот такого рода доступ доступ оно Давайте попробуем доступ к скопус комплементоре эксс юкрэйн Так он называется по ссылке на Которое вы видите и которую Я вам пересылаю Богдан александрович вот Ссылоч"
+      ],
+      "keywords_mentioned": [
+        "methodology",
+        "scopus",
+        "vosviewer",
+        "reproducibility"
+      ]
+    },
+    {
+      "section": "6.3 Research Implications",
+      "title": "Key Themes in Game Development Education",
+      "content": "The bibliometric analysis reveals that game development education research centers around Unity-based development, immersive technologies (VR/AR), and gamification as key pedagogical approaches.",
+      "supporting_quotes": [],
+      "keywords_mentioned": [
+        "ар",
+        "вр",
+        "гейм",
+        "игры",
+        "обучение",
+        "юнити",
+        "образование",
+        "игра",
+        "разработка",
+        "юники"
+      ]
+    }
+  ],
+  "themes": {
+    "ар": 180,
+    "вр": 87,
+    "гейм": 50,
+    "игры": 47,
+    "обучение": 43,
+    "юнити": 35,
+    "образование": 32,
+    "игра": 30,
+    "разработка": 27,
+    "юники": 23,
+    "три д": 19,
+    "мотивация": 13,
+    "виртуальная реальность": 10,
+    "серьезные игры": 8,
+    "дополненная реальность": 4,
+    "ar": 3,
+    "девелопмент": 3,
+    "трехмерный": 2
+  },
+  "insights_summary": {
+    "total": 126,
+    "by_category": {
+      "Search Strategy": 13,
+      "Database Usage": 11,
+      "Methodology": 12,
+      "Reproducibility": 4,
+      "Documentation": 31,
+      "Network Analysis": 12,
+      "Clustering": 43
+    }
+  }
+}

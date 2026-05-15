@@ -1,0 +1,16 @@
+track,curriculum_claim,citation_key,study_design,sample_n,outcome_metric,effect_size,grade_confidence,direction
+A_Immersive,VR/AR improves understanding vs traditional classroom,wiafe2025,Randomised controlled trial (within-subjects),139,Comparative learning gain on understanding (Bloom level 2),AR Cohen d = 0.71 (vs classroom); VR d = 0.32 (n.s. vs YouTube),Moderate,positive_AR
+A_Immersive,VR/AR engagement and motivation gains in higher education,radianti2020,Systematic review,38 primary studies,Engagement / motivation (heterogeneous instruments),Mixed; mostly small-positive,Low,mixed_positive
+A_Immersive,Immersive technology integration broadens conceptual access,RASHEVSKA2026100147,Theoretical analysis with literature synthesis,127,Framework coherence and coverage,Qualitative,Very Low,supportive
+A_Immersive,XR/AR effects in educational contexts,algerafi2023,Comprehensive evaluation review,not reported,Qualitative meta-synthesis,Heterogeneous,Low,mixed_positive
+B_GameAI_Engines,Pre-post gains from serious game development course,spangenberger2025,Pre-post (single-group),48,Self-efficacy and pro-environmental values,d ≈ 0.5 self-efficacy; 23/48 critical-reflection gains,Low_to_Moderate,positive
+B_GameAI_Engines,CS engagement increases via Unity-based game projects,Comber2019,Educational case study (pre-post),small,Engagement and motivation,Qualitative — significant engagement increase reported,Very Low,positive
+B_GameAI_Engines,Game-creative learning trajectory in programming courses,pietrikova2025,Longitudinal observational (15 yr),unspecified,Adoption / curriculum trajectory,Descriptive,Very Low,trend_documented
+B_GameAI_Engines,AI-assisted educational toolchain integration,Zahorodko2026,Theoretical framework synthesis,not applicable,Framework propositions,Conceptual,Very Low,supportive
+C_Pedagogy,Game-based learning broad outcomes,boyle2016,Meta-systematic-review (update),143 papers,Mixed effect sizes; positive for engagement / motivation,Mixed-positive,Moderate,mixed_positive
+C_Pedagogy,Computer + serious games for learning,connolly2012,Systematic review (38 RCTs / 15 quasi),varied,Mixed; mostly small-positive on knowledge gain,Mixed-positive,Moderate,mixed_positive
+C_Pedagogy,Gamification effects on engagement and learning,hamari2014,Meta-analysis,24 empirical studies,Engagement and motivation,Mostly positive but heterogeneous,Low_to_Moderate,mixed_positive
+C_Pedagogy,Teacher scaffolding mediates game-based-learning gains,kacmaz2025,Empirical (regression analysis),not reported,Beta coefficients on outcome variables,β reported (emotional / responsibility scaffolds dominate),Moderate,positive
+C_Pedagogy,Serious game motivation and learning outcomes,rodriguezcalzada2024,Empirical (mixed methods),not reported,Motivation + learning outcome composite,Reported as significant,Low,positive
+C_Pedagogy,Game-based learning integration in CS education,videnovik2023,Systematic review,not reported,Curriculum integration patterns,Descriptive,Very Low,trend_documented
+C_Pedagogy,Game-based learning in primary / secondary CS,videnovik2024ent,Systematic review,not reported,Outcome heterogeneity flagged,Descriptive,Very Low,trend_documented

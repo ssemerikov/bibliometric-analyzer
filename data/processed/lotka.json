@@ -1,0 +1,80 @@
+{
+  "alpha": 3.3784148121608237,
+  "c": 3351.0097039864486,
+  "r_squared": 0.9859985777796118,
+  "n_authors": 3891,
+  "productivity_distribution": {
+    "1": 3421,
+    "2": 324,
+    "3": 82,
+    "4": 31,
+    "5": 13,
+    "6": 7,
+    "7": 6,
+    "8": 4,
+    "9": 1,
+    "10": 2
+  },
+  "top_authors": [
+    [
+      "Wang A.I.",
+      10
+    ],
+    [
+      "Barnes T.",
+      10
+    ],
+    [
+      "Shabalina O.",
+      9
+    ],
+    [
+      "Kultima A.",
+      8
+    ],
+    [
+      "Fernández-Manjón B.",
+      8
+    ],
+    [
+      "Wu B.",
+      8
+    ],
+    [
+      "Torrente J.",
+      8
+    ],
+    [
+      "Göbel S.",
+      7
+    ],
+    [
+      "Fowler A.",
+      7
+    ],
+    [
+      "Reng L.",
+      7
+    ],
+    [
+      "Schoenau-Fog H.",
+      7
+    ],
+    [
+      "Kofoed L.B.",
+      7
+    ],
+    [
+      "Moreno-Ger P.",
+      7
+    ],
+    [
+      "Xu X.",
+      6
+    ],
+    [
+      "Maxim B.R.",
+      6
+    ]
+  ]
+}
