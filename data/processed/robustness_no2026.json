@@ -1,0 +1,45 @@
+{
+  "n_docs_full": 1511,
+  "n_docs_no2026": 1480,
+  "n_2026_dropped": 31,
+  "growth_full": {
+    "best_model": "bilogistic",
+    "gompertz_r2": 0.9980674670428232,
+    "bilogistic_r2": 0.998894773710816,
+    "saturation_ratio": 0.41376757980010004,
+    "gompertz_asymptote": 3651.8085847373454,
+    "bilogistic_asymptote": 2042.7282327143857,
+    "delta_aic_bilogistic_minus_gompertz": -10.204662192240676
+  },
+  "growth_no2026": {
+    "best_model": "bilogistic",
+    "gompertz_r2": 0.9977131512921553,
+    "bilogistic_r2": 0.9988880988355126,
+    "saturation_ratio": 0.3915469157189944,
+    "gompertz_asymptote": 3779.8790913275056,
+    "bilogistic_asymptote": 2479.7485641550825,
+    "delta_aic_bilogistic_minus_gompertz": -14.190896564270133
+  },
+  "temporal_coupling_no2026": {
+    "pre-2018": {
+      "n_docs": 654,
+      "n_coupling_edges": 10086,
+      "density": 0.0472343594138556
+    },
+    "2018-2021": {
+      "n_docs": 347,
+      "n_coupling_edges": 2635,
+      "density": 0.04389398810614516
+    },
+    "2022-2025": {
+      "n_docs": 479,
+      "n_coupling_edges": 4812,
+      "density": 0.04203317581083324
+    }
+  },
+  "kendall_tau_no2026": {
+    "pre-2018_vs_2018-2021": -0.2235935286541703,
+    "pre-2018_vs_2022-2025": -0.4373493942601718,
+    "2018-2021_vs_2022-2025": -0.32960064740905276
+  }
+}

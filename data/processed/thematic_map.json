@@ -2,113 +2,212 @@
   "clusters": [
     {
       "cluster_id": 0,
-      "n_nodes": 2,
-      "centrality": 4.0,
-      "density": 1.5,
+      "n_nodes": 76,
+      "centrality": 1072.0,
+      "density": 6.881578947368421,
       "top_keywords": [
         [
-          "workshop",
+          "serious game",
+          203
+        ],
+        [
+          "game-based learning",
+          138
+        ],
+        [
+          "educational game",
+          97
+        ],
+        [
+          "gamification",
+          83
+        ],
+        [
+          "e-learning",
+          20
+        ]
+      ],
+      "quadrant": "motor"
+    },
+    {
+      "cluster_id": 1,
+      "n_nodes": 31,
+      "centrality": 533.0,
+      "density": 4.032258064516129,
+      "top_keywords": [
+        [
+          "game design",
+          88
+        ],
+        [
+          "game jam",
+          21
+        ],
+        [
+          "programming",
+          20
+        ],
+        [
+          "digital game",
+          16
+        ],
+        [
+          "child",
+          15
+        ]
+      ],
+      "quadrant": "basic_transversal"
+    },
+    {
+      "cluster_id": 2,
+      "n_nodes": 11,
+      "centrality": 123.0,
+      "density": 2.090909090909091,
+      "top_keywords": [
+        [
+          "pedagogy",
+          19
+        ],
+        [
+          "project based learning",
+          6
+        ],
+        [
+          "pervasive game",
+          5
+        ],
+        [
+          "games and learning",
           4
         ],
         [
-          "digital game ai",
+          "chatgpt",
           3
         ]
       ],
       "quadrant": "emerging_or_declining"
     },
     {
-      "cluster_id": 1,
-      "n_nodes": 54,
-      "centrality": 1014.0,
-      "density": 6.166666666666667,
+      "cluster_id": 3,
+      "n_nodes": 32,
+      "centrality": 363.0,
+      "density": 3.71875,
       "top_keywords": [
         [
-          "game development",
-          281
+          "virtual reality",
+          38
         ],
         [
-          "game design",
-          88
-        ],
-        [
-          "computer science education",
-          34
-        ],
-        [
-          "game programming",
-          22
-        ],
-        [
-          "computational thinking",
-          19
-        ]
-      ],
-      "quadrant": "motor"
-    },
-    {
-      "cluster_id": 2,
-      "n_nodes": 33,
-      "centrality": 343.0,
-      "density": 3.0,
-      "top_keywords": [
-        [
-          "educational game",
-          35
-        ],
-        [
-          "motivation",
+          "unity",
           26
         ],
         [
-          "video game development",
-          15
+          "augmented reality",
+          25
         ],
         [
-          "evaluation",
+          "collaboration",
           14
         ],
         [
-          "assessment",
-          11
+          "creativity",
+          12
         ]
       ],
       "quadrant": "emerging_or_declining"
     },
     {
-      "cluster_id": 3,
-      "n_nodes": 79,
-      "centrality": 993.0,
-      "density": 5.949367088607595,
+      "cluster_id": 4,
+      "n_nodes": 54,
+      "centrality": 831.0,
+      "density": 6.7407407407407405,
       "top_keywords": [
         [
-          "serious games",
-          150
+          "education",
+          116
         ],
         [
-          "game-based learning",
-          114
+          "game",
+          78
         ],
         [
-          "gamification",
-          81
+          "video game",
+          41
         ],
         [
-          "educational games",
-          62
+          "learning",
+          39
         ],
         [
-          "pedagogy",
+          "teaching",
           19
         ]
       ],
       "quadrant": "motor"
     },
     {
-      "cluster_id": 4,
+      "cluster_id": 5,
+      "n_nodes": 76,
+      "centrality": 1124.0,
+      "density": 6.75,
+      "top_keywords": [
+        [
+          "game development",
+          309
+        ],
+        [
+          "computer science education",
+          37
+        ],
+        [
+          "computer game",
+          31
+        ],
+        [
+          "software engineering",
+          29
+        ],
+        [
+          "motivation",
+          28
+        ]
+      ],
+      "quadrant": "motor"
+    },
+    {
+      "cluster_id": 6,
+      "n_nodes": 9,
+      "centrality": 82.0,
+      "density": 2.888888888888889,
+      "top_keywords": [
+        [
+          "educational technology",
+          17
+        ],
+        [
+          "computer graphics",
+          11
+        ],
+        [
+          "soft skill",
+          5
+        ],
+        [
+          "storytelling",
+          4
+        ],
+        [
+          "computer-aided learning",
+          3
+        ]
+      ],
+      "quadrant": "emerging_or_declining"
+    },
+    {
+      "cluster_id": 7,
       "n_nodes": 15,
-      "centrality": 132.0,
-      "density": 8.666666666666666,
+      "centrality": 134.0,
+      "density": 8.4,
       "top_keywords": [
         [
           "higher education",
@@ -119,108 +218,21 @@
           7
         ],
         [
-          "online learning",
-          7
-        ],
-        [
-          "skills",
+          "skill",
           6
         ],
         [
           "game curriculum",
           5
+        ],
+        [
+          "game developer",
+          5
         ]
       ],
       "quadrant": "niche"
-    },
-    {
-      "cluster_id": 5,
-      "n_nodes": 64,
-      "centrality": 837.0,
-      "density": 6.59375,
-      "top_keywords": [
-        [
-          "education",
-          116
-        ],
-        [
-          "games",
-          57
-        ],
-        [
-          "serious game",
-          53
-        ],
-        [
-          "learning",
-          39
-        ],
-        [
-          "video games",
-          34
-        ]
-      ],
-      "quadrant": "motor"
-    },
-    {
-      "cluster_id": 6,
-      "n_nodes": 31,
-      "centrality": 339.0,
-      "density": 3.838709677419355,
-      "top_keywords": [
-        [
-          "virtual reality",
-          36
-        ],
-        [
-          "augmented reality",
-          24
-        ],
-        [
-          "game",
-          21
-        ],
-        [
-          "unity",
-          15
-        ],
-        [
-          "collaboration",
-          14
-        ]
-      ],
-      "quadrant": "emerging_or_declining"
-    },
-    {
-      "cluster_id": 7,
-      "n_nodes": 31,
-      "centrality": 378.0,
-      "density": 4.161290322580645,
-      "top_keywords": [
-        [
-          "software engineering",
-          29
-        ],
-        [
-          "computer games",
-          28
-        ],
-        [
-          "e-learning",
-          16
-        ],
-        [
-          "educational technology",
-          15
-        ],
-        [
-          "software development",
-          15
-        ]
-      ],
-      "quadrant": "basic_transversal"
     }
   ],
-  "centrality_median": 360.5,
-  "density_median": 5.055328705594119
+  "centrality_median": 448.0,
+  "density_median": 5.386499402628434
 }

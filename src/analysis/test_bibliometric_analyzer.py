@@ -43,10 +43,15 @@ from bibliometric_analyzer import (
     AffiliationBiasAnalyzer,
     SensitivityAnalyzer,
     TemporalCouplingAnalyzer,
+    TheoryOperationalisation,
     RANDOM_SEED,
     _adjusted_rand_index,
     _normalise_country,
+    _canonicalise_keyword,
+    compute_normalization_effect,
+    compute_industry_lag,
 )
+from networkx.algorithms import community
 
 
 class TestVOSViewerNode(TestCase):
@@ -676,6 +681,328 @@ class TestTemporalCouplingAnalyzer(TestCase):
         # Docs 2 and 3 (both in 2022-2026 era) share 1 ref ('lee_2015').
         eras = self.tc.per_era_coupling()
         self.assertGreaterEqual(eras['2022-2026']['n_coupling_edges'], 1)
+
+
+# =============================================================================
+# Tests for the second wave of Array-revision additions: keyword normalisation,
+# alternative community-detection algorithms, corpus-build determinism, growth
+# models, theory operationalisation, and the academia-industry lag metric.
+# =============================================================================
+
+
+class TestCanonicaliseKeyword(TestCase):
+    """R2 minor #3 — deterministic singular/plural + synonym normalisation."""
+
+    def test_synonym_and_plural_forms(self):
+        self.assertEqual(_canonicalise_keyword('Serious Games'), 'serious game')
+        self.assertEqual(_canonicalise_keyword('GAMES'), 'game')
+        self.assertEqual(_canonicalise_keyword('educational games'), 'educational game')
+
+    def test_protected_plural_not_singularised(self):
+        # 'graphics' is a protected non-plural — must NOT become 'computer graphic'.
+        self.assertEqual(_canonicalise_keyword('Computer Graphics'), 'computer graphics')
+        self.assertEqual(_canonicalise_keyword('ethics'), 'ethics')
+
+    def test_direct_synonyms(self):
+        self.assertEqual(_canonicalise_keyword('Unity3D'), 'unity')
+        self.assertEqual(_canonicalise_keyword('GenAI'), 'generative ai')
+
+    def test_empty_input(self):
+        self.assertEqual(_canonicalise_keyword(''), '')
+
+
+class TestNormalizationEffect(TestCase):
+    """R2 minor #3 — evidence that normalisation consolidates variants without
+    destabilising the thematic structure."""
+
+    def setUp(self):
+        # Rows mixing singular/plural variants so several raw nodes collapse.
+        self.df = pd.DataFrame({
+            'Author Keywords': [
+                'serious game; game; unity',
+                'serious games; games; unity',
+                'serious game; game; unity',
+                'serious games; games; unity',
+                'serious game; game; unity',
+                'serious games; games; unity',
+            ],
+        })
+
+    def test_effect_dict_shape(self):
+        r = compute_normalization_effect(self.df, min_occ=3)
+        for key in ('raw_nodes', 'normalised_nodes', 'nodes_merged_away',
+                    'raw_clusters', 'normalised_clusters',
+                    'ari_raw_vs_normalised', 'top_merges'):
+            self.assertIn(key, r)
+        self.assertIsInstance(r['top_merges'], list)
+
+    def test_normalisation_reduces_nodes(self):
+        r = compute_normalization_effect(self.df, min_occ=3)
+        self.assertGreaterEqual(r['nodes_merged_away'], 1)
+        self.assertLessEqual(r['normalised_nodes'], r['raw_nodes'])
+
+
+class TestSensitivityAlgorithms(TestCase):
+    """R1 #5 — Louvain vs Leiden vs Infomap agreement on a corpus-built graph."""
+
+    def setUp(self):
+        self.df = pd.DataFrame({
+            'Author Keywords': [
+                'unity; vr; game development',
+                'unity; ar; game development',
+                'unity; vr; education',
+                'godot; programming; education',
+                'godot; programming; learning',
+                'godot; learning; education',
+            ],
+        })
+        self.G = SensitivityAnalyzer.from_corpus_keywords(self.df, min_occ=1)
+        self.sens = SensitivityAnalyzer(self.G)
+
+    def test_partition_leiden_covers_all_nodes(self):
+        try:
+            import igraph  # noqa: F401
+            import leidenalg  # noqa: F401
+        except Exception:
+            self.skipTest("leidenalg/igraph not installed")
+        part = self.sens.partition_leiden(gamma=1.0, seed=42)
+        self.assertIsNotNone(part)
+        self.assertIsInstance(part, list)
+        self.assertTrue(all(isinstance(c, set) for c in part))
+        union = set().union(*part) if part else set()
+        self.assertEqual(union, set(self.G.nodes()))
+
+    def test_partition_infomap_covers_all_nodes(self):
+        try:
+            from infomap import Infomap  # noqa: F401
+        except Exception:
+            self.skipTest("infomap not installed")
+        part = self.sens.partition_infomap(seed=42)
+        self.assertIsNotNone(part)
+        self.assertIsInstance(part, list)
+        self.assertTrue(all(isinstance(c, set) for c in part))
+        union = set().union(*part) if part else set()
+        self.assertEqual(union, set(self.G.nodes()))
+
+    def test_algorithm_agreement_summary(self):
+        agr = self.sens.algorithm_agreement(gamma=1.0, seed=42)
+        self.assertIn('summary', agr)
+        self.assertIn('louvain', agr['summary'])
+        self.assertIn('n_clusters', agr['summary']['louvain'])
+        self.assertIn('modularity', agr['summary']['louvain'])
+        # Louvain compared against itself is a perfect match.
+        self.assertIn('ari_vs_louvain', agr)
+        self.assertAlmostEqual(agr['ari_vs_louvain']['louvain'], 1.0)
+
+        # Leiden / Infomap only asserted when their libraries are present.
+        try:
+            import igraph  # noqa: F401
+            import leidenalg  # noqa: F401
+            self.assertIn('leiden', agr['summary'])
+            self.assertIn('n_clusters', agr['summary']['leiden'])
+            self.assertIn('modularity', agr['summary']['leiden'])
+        except Exception:
+            pass
+        try:
+            from infomap import Infomap  # noqa: F401
+            self.assertIn('infomap', agr['summary'])
+            self.assertIn('n_clusters', agr['summary']['infomap'])
+            self.assertIn('modularity', agr['summary']['infomap'])
+        except Exception:
+            pass
+
+
+class TestCorpusBuildDeterminism(TestCase):
+    """Guards the PYTHONHASHSEED fix: sorted node/edge insertion must give a
+    byte-identical graph and a hash-seed-independent Louvain partition."""
+
+    def setUp(self):
+        self.df = pd.DataFrame({
+            'Author Keywords': [
+                'unity; vr; education',
+                'unity; ar; learning',
+                'unity; godot; programming',
+                'godot; learning; education',
+                'unity; vr; game development',
+                'godot; programming; education',
+            ],
+        })
+
+    def test_identical_nodes_and_edges(self):
+        G1 = SensitivityAnalyzer.from_corpus_keywords(self.df, min_occ=1)
+        G2 = SensitivityAnalyzer.from_corpus_keywords(self.df, min_occ=1)
+        self.assertEqual(sorted(G1.nodes()), sorted(G2.nodes()))
+        self.assertEqual(set(G1.edges()), set(G2.edges()))
+
+    def test_identical_louvain_cluster_count(self):
+        G1 = SensitivityAnalyzer.from_corpus_keywords(self.df, min_occ=1)
+        G2 = SensitivityAnalyzer.from_corpus_keywords(self.df, min_occ=1)
+        p1 = community.louvain_communities(G1, weight='weight', resolution=1.0, seed=42)
+        p2 = community.louvain_communities(G2, weight='weight', resolution=1.0, seed=42)
+        self.assertEqual(len(p1), len(p2))
+
+
+class TestFieldCompletenessScore(TestCase):
+    """R1.3 / R1.6 — competing growth-model fits on the cumulative curve."""
+
+    def setUp(self):
+        self.temp_dir = tempfile.mkdtemp()
+        self.csv_path = Path(self.temp_dir) / "growth.csv"
+        # Plausible S-shaped cumulative growth across 16 distinct years.
+        counts = {2010: 1, 2011: 1, 2012: 2, 2013: 3, 2014: 4, 2015: 6,
+                  2016: 8, 2017: 11, 2018: 14, 2019: 18, 2020: 22, 2021: 25,
+                  2022: 27, 2023: 28, 2024: 29, 2025: 30}
+        rows = []
+        for year, c in counts.items():
+            for i in range(c):
+                rows.append({
+                    'Authors': 'Smith, J.', 'Title': f'doc_{year}_{i}',
+                    'Year': year, 'Source title': 'Journal A',
+                    'Cited by': i, 'Author Keywords': 'game development; unity',
+                })
+        pd.DataFrame(rows).to_csv(self.csv_path, index=False, encoding='utf-8-sig')
+        self.analyzer = ScopusAnalyzer(str(self.csv_path))
+
+    def tearDown(self):
+        shutil.rmtree(self.temp_dir)
+
+    def test_growth_model_keys(self):
+        r = self.analyzer.compute_field_completeness_score()
+        for key in ('gompertz_r2', 'bilogistic_r2', 'linear_r2', 'exponential_r2',
+                    'saturation_ratio', 'best_model'):
+            self.assertIn(key, r)
+        for model in ('linear', 'exponential', 'gompertz', 'bilogistic'):
+            self.assertIn(f'{model}_aic', r)
+            self.assertIn(f'{model}_bic', r)
+
+    def test_best_model_valid(self):
+        r = self.analyzer.compute_field_completeness_score()
+        self.assertIn(r['best_model'],
+                      {'linear', 'exponential', 'gompertz', 'bilogistic'})
+
+
+class TestScopusYearMax(TestCase):
+    """Robustness variant (R1.3 / R2.2) — exclude the incomplete 2026 partial year."""
+
+    def setUp(self):
+        self.temp_dir = tempfile.mkdtemp()
+        self.csv_path = Path(self.temp_dir) / "years.csv"
+        csv_content = '''"Authors","Title","Year","Source title","Cited by","Author Keywords"
+"A, B","d1","2023","J","1","game"
+"A, B","d2","2024","J","1","game"
+"A, B","d3","2025","J","1","game"
+"A, B","d4","2026","J","0","game"
+"A, B","d5","2026","J","0","game"
+'''
+        self.csv_path.write_text(csv_content, encoding='utf-8-sig')
+
+    def tearDown(self):
+        shutil.rmtree(self.temp_dir)
+
+    def test_year_cap_excludes_2026(self):
+        full = ScopusAnalyzer(str(self.csv_path))
+        capped = ScopusAnalyzer(str(self.csv_path), year_max=2025)
+        self.assertEqual(len(full.df), 5)
+        self.assertEqual(len(capped.df), 3)
+        self.assertFalse((capped.df['Year'] > 2025).any())
+
+
+class TestTheoryOperationalisation(TestCase):
+    """R2 major #1 — engine-context construct guard, proxy-source variants,
+    and abstract inclusion toggle."""
+
+    def setUp(self):
+        self.df = pd.DataFrame({
+            'Author Keywords': [
+                'unity; game development',
+                'construct; learning',
+                'godot; programming',
+                'unity; vr',
+            ],
+            'Index Keywords': [
+                'game engines',
+                'education',
+                'software',
+                'virtual reality',
+            ],
+            'Abstract': [
+                'We used the Construct 3 engine to build a game.',
+                'We construct a theoretical model of learning.',
+                'Scirra Construct was used to prototype the level.',
+                'The construction of knowledge underpins the pedagogy.',
+            ],
+            'Year': [2020, 2021, 2022, 2023],
+            'Cited by': [5, 3, 8, 2],
+        })
+
+    def test_construct_guard_is_strict(self):
+        import re
+        t = TheoryOperationalisation(self.df)
+        # Naive \bconstruct\b across keywords + abstract matches rows 0, 1, 2.
+        naive = [
+            i for i in self.df.index
+            if re.search(r'\bconstruct\b',
+                         (str(self.df.at[i, 'Author Keywords']) + ' '
+                          + str(self.df.at[i, 'Abstract'])).lower())
+        ]
+        strict = t.docs_mentioning('construct')
+        # Engine-context rows only: 'Construct 3' (0) and 'Scirra' (2).
+        self.assertEqual(sorted(strict), [0, 2])
+        self.assertLess(len(strict), len(naive))
+
+    def test_variant_hypothesis_tests_shape(self):
+        graph = SensitivityAnalyzer.from_corpus_keywords(self.df, min_occ=1)
+        vh = TheoryOperationalisation.variant_hypothesis_tests(self.df, graph)
+        for cfg in ('author_keywords_only', 'index_keywords_only',
+                    'keywords_plus_abstract'):
+            self.assertIn(cfg, vh)
+            for key in ('h1', 'h2', 'h3', 'n_platforms_detected'):
+                self.assertIn(key, vh[cfg])
+
+    def test_include_abstract_toggle(self):
+        df = pd.DataFrame({
+            'Author Keywords': ['unity; game development'],
+            'Index Keywords': ['game engines'],
+            'Abstract': ['This mentions zzuniqueabstracttoken only in prose.'],
+        })
+        t_yes = TheoryOperationalisation(df, include_abstract=True)
+        t_no = TheoryOperationalisation(df, include_abstract=False)
+        self.assertIn('zzuniqueabstracttoken', t_yes._doc_keyword_text(0))
+        self.assertNotIn('zzuniqueabstracttoken', t_no._doc_keyword_text(0))
+
+
+class TestIndustryLag(TestCase):
+    """R2 major #3 — academia-industry lag made measurable per term family."""
+
+    def setUp(self):
+        self.df = pd.DataFrame({
+            'Author Keywords': [
+                'unity; virtual reality; game development',
+                'mobile game; android; education',
+                'generative ai; game development',
+                'machine learning; procedural content generation',
+            ],
+            'Abstract': [
+                'A virtual reality study using immersive headsets.',
+                'A mobile game for android smartphones.',
+                'We apply chatgpt and large language model prompting.',
+                'Deep learning and neural network methods are compared.',
+            ],
+            'Year': [2019, 2021, 2023, 2024],
+        })
+
+    def test_families_and_fields(self):
+        lag = compute_industry_lag(self.df, min_occ=3)
+        self.assertIn('families', lag)
+        for fam in ('mobile', 'generative_ai', 'immersive_xr', 'ai_general'):
+            self.assertIn(fam, lag['families'])
+            entry = lag['families'][fam]
+            for key in ('n_docs_author_keyword', 'n_docs_abstract',
+                        'in_keyword_network', 'network_terms', 'abstract_by_year'):
+                self.assertIn(key, entry)
+            self.assertIsInstance(entry['in_keyword_network'], bool)
+            self.assertIsInstance(entry['network_terms'], list)
+            self.assertIsInstance(entry['abstract_by_year'], dict)
 
 
 if __name__ == '__main__':

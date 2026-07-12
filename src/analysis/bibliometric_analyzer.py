@@ -48,9 +48,107 @@ RANDOM_SEED = 42
 
 
 def _set_global_seed(seed: int = RANDOM_SEED) -> None:
-    """Seed Python random and NumPy. Call at pipeline entry and before stochastic ops."""
+    """Seed Python random and NumPy. Call at pipeline entry and before stochastic ops.
+
+    Note: byte-identical clustering ALSO requires that graph node/edge insertion
+    order be independent of ``PYTHONHASHSEED`` (Louvain is order-sensitive). We
+    guarantee this by inserting nodes/edges in sorted order everywhere a graph is
+    built from a Python ``set``/``dict`` (see ``from_corpus_keywords``), rather
+    than relying on the hash seed.
+    """
     random.seed(seed)
     np.random.seed(seed)
+
+
+# ---------------------------------------------------------------------------
+# Keyword normalisation (co-word thesaurus + WordNet lemmatisation).
+# Addresses Array reviewer R2 (minor #3): singular/plural + synonym fragmentation
+# (e.g. "serious game" vs "serious games", "game" vs "games") splits what should
+# be one node across several, inflating the node count and fragmenting clusters.
+# Normalisation is deterministic — a fixed, version-controlled thesaurus file plus
+# WordNet noun-lemmatisation of the head token — so canonical forms never depend on
+# run order or hash seed. See ``keyword_thesaurus.json``.
+# ---------------------------------------------------------------------------
+
+_THESAURUS_PATH = Path(__file__).with_name('keyword_thesaurus.json')
+_KW_WHITESPACE_RE = re.compile(r'\s+')
+# Surrounding characters to trim from raw keywords (straight + curly quotes, dots).
+_KW_STRIP_CHARS = '“”‘’"\'. '
+
+
+def _load_thesaurus(path: Path = _THESAURUS_PATH) -> Dict[str, Any]:
+    """Load the curated keyword thesaurus; degrade gracefully if absent."""
+    try:
+        data = json.loads(path.read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return {'synonyms': {}, 'protect_plurals': set()}
+    return {
+        'synonyms': {str(k).strip().lower(): str(v) for k, v in data.get('synonyms', {}).items()},
+        'protect_plurals': {str(w).lower() for w in data.get('protect_plurals', [])},
+    }
+
+
+_THESAURUS = _load_thesaurus()
+
+
+def _get_lemmatizer():
+    """Return a cached WordNet lemmatiser, or None if the corpus is unavailable."""
+    cache = getattr(_get_lemmatizer, '_cache', 'unset')
+    if cache != 'unset':
+        return cache
+    lem = None
+    try:
+        from nltk.stem import WordNetLemmatizer
+        lem = WordNetLemmatizer()
+        lem.lemmatize('tests')  # force WordNet corpus load; raises if data missing
+    except Exception:
+        warnings.warn("WordNet lemmatiser unavailable; using rule-based plural "
+                      "stripping for keyword normalisation (results may differ from "
+                      "the WordNet-based reference run).")
+        lem = None
+    _get_lemmatizer._cache = lem
+    return lem
+
+
+def _rule_based_singular(word: str) -> str:
+    """Deterministic, dependency-free fallback singulariser for a head token."""
+    if word.endswith('ies') and len(word) > 4:
+        return word[:-3] + 'y'
+    if word.endswith(('ses', 'xes', 'zes', 'ches', 'shes')):
+        return word[:-2]
+    if word.endswith('s') and not word.endswith('ss') and len(word) > 3:
+        return word[:-1]
+    return word
+
+
+def _canonicalise_keyword(kw: str, thesaurus: Optional[Dict[str, Any]] = None) -> str:
+    """Map a raw keyword to its canonical form.
+
+    Steps (all deterministic): lower / strip / collapse-whitespace / strip quotes
+    -> direct thesaurus lookup -> WordNet noun-lemmatise the head (last) token
+    unless it is a protected non-plural (e.g. 'graphics', 'physics') -> re-check
+    the thesaurus. Returns '' for empty input.
+    """
+    thes = thesaurus if thesaurus is not None else _THESAURUS
+    synonyms = thes.get('synonyms', {})
+    protect = thes.get('protect_plurals', set())
+
+    s = _KW_WHITESPACE_RE.sub(' ', kw.strip().lower())
+    s = s.strip(_KW_STRIP_CHARS)
+    if not s:
+        return ''
+    if s in synonyms:
+        return synonyms[s]
+
+    tokens = s.split(' ')
+    head = tokens[-1]
+    if head and head not in protect:
+        lem = _get_lemmatizer()
+        singular = lem.lemmatize(head) if lem is not None else _rule_based_singular(head)
+        if singular and singular != head:
+            tokens[-1] = singular
+    cand = ' '.join(tokens)
+    return synonyms.get(cand, cand)
 
 
 @dataclass
@@ -410,8 +508,11 @@ class NetworkAnalyzer:
 class ScopusAnalyzer:
     """Analyzer for Scopus export CSV data."""
 
-    def __init__(self, csv_path: str):
+    def __init__(self, csv_path: str, year_max: Optional[int] = None):
         self.csv_path = Path(csv_path)
+        # Optional upper year bound. Set to 2025 to exclude the incomplete 2026
+        # partial year for the robustness variant (reviewers R1.3 / R2.2).
+        self.year_max = year_max
         self.df = self._load_data()
 
     def _load_data(self) -> pd.DataFrame:
@@ -428,6 +529,10 @@ class ScopusAnalyzer:
         # Convert citations to numeric
         if 'Cited by' in df.columns:
             df['Cited by'] = pd.to_numeric(df['Cited by'], errors='coerce').fillna(0).astype(int)
+
+        # Optional year cap (excludes the incomplete final year for robustness).
+        if self.year_max is not None and 'Year' in df.columns:
+            df = df[df['Year'] <= self.year_max]
 
         return df
 
@@ -475,75 +580,121 @@ class ScopusAnalyzer:
         return self.df.groupby('Year').size().reset_index(name='count')
 
     def compute_field_completeness_score(self) -> Dict[str, float]:
-        """Diagnose whether the corpus is complete by fitting a Gompertz to cumulative publications.
+        """Fit competing growth models to the cumulative-publications curve.
 
-        A well-saturated emergent topic typically follows a Gompertz S-curve.
-        We compare a Gompertz fit against linear and exponential fits on the
-        cumulative-publications curve. Returns R² for each fit plus a
-        ``saturation_ratio`` = (latest cumulative) / (Gompertz asymptote).
+        Compares linear, exponential, single-wave **Gompertz**, and two-wave
+        **bi-logistic** (Meyer 1994) fits, reporting R² and AIC/BIC for each and
+        selecting ``best_model`` by AIC. The Gompertz ``saturation_ratio`` =
+        (latest cumulative) / (Gompertz asymptote).
 
-        Closes R1.3: distinguishes "field is genuinely sparse" (Gompertz with
-        low asymptote) from "query is too restrictive" (linear or exponential
-        without saturation).
+        Addresses reviewer R1.3 (sparse field vs restrictive query) AND R1.6/R1.7:
+        a single saturating curve can misread a disruption-driven regrowth as
+        "maturity", so we test whether a multi-wave (bi-logistic) model is
+        preferred and interpret the saturation ratio as an index-scope estimate
+        rather than a maturity verdict.
         """
+        nan = float('nan')
+        empty = {'gompertz_r2': nan, 'linear_r2': nan, 'exponential_r2': nan,
+                 'bilogistic_r2': nan, 'saturation_ratio': nan, 'best_model': None}
         try:
             from scipy.optimize import curve_fit
         except ImportError:
-            return {'gompertz_r2': float('nan'), 'linear_r2': float('nan'),
-                    'exponential_r2': float('nan'), 'saturation_ratio': float('nan')}
+            return empty
 
         df_y = self.get_publications_by_year().sort_values('Year')
         if df_y.empty or len(df_y) < 4:
-            return {'gompertz_r2': float('nan'), 'linear_r2': float('nan'),
-                    'exponential_r2': float('nan'), 'saturation_ratio': float('nan')}
+            return empty
 
         years = df_y['Year'].astype(float).to_numpy()
         cum = df_y['count'].cumsum().astype(float).to_numpy()
         t = years - years.min()
+        n = len(t)
 
-        def r2(observed, predicted):
-            ss_res = float(np.sum((observed - predicted) ** 2))
-            ss_tot = float(np.sum((observed - observed.mean()) ** 2))
+        def ssr(observed, predicted):
+            return float(np.sum((observed - predicted) ** 2))
+
+        def r2_from_ssr(ss_res):
+            ss_tot = float(np.sum((cum - cum.mean()) ** 2))
             return 1.0 - ss_res / ss_tot if ss_tot > 0 else 0.0
 
-        # Linear: cum = a*t + b.
-        linear_coef = np.polyfit(t, cum, 1)
-        linear_pred = np.polyval(linear_coef, t)
-        linear_r2 = r2(cum, linear_pred)
+        def aic_bic(ss_res, k):
+            # Gaussian-likelihood AIC/BIC; k = model params, +1 for error variance.
+            if not np.isfinite(ss_res) or ss_res <= 0 or n <= k + 1:
+                return nan, nan
+            ll_term = n * np.log(ss_res / n)
+            return float(ll_term + 2 * (k + 1)), float(ll_term + (k + 1) * np.log(n))
 
-        # Exponential: cum = a * exp(b*t). Fit with curve_fit.
+        results: Dict[str, float] = {'cumulative_at_last_year': float(cum[-1]),
+                                     'years_observed': int(n)}
+        ssr_by_model: Dict[str, Tuple[float, int]] = {}
+
+        # Linear: cum = a*t + b (2 params).
+        linear_pred = np.polyval(np.polyfit(t, cum, 1), t)
+        ssr_by_model['linear'] = (ssr(cum, linear_pred), 2)
+
+        # Exponential: cum = a*exp(b*t) (2 params).
         def exp_model(x, a, b):
             return a * np.exp(np.clip(b * x, -50, 50))
         try:
-            exp_p, _ = curve_fit(exp_model, t, cum,
-                                 p0=(1.0, 0.1), maxfev=10000)
-            exp_r2 = r2(cum, exp_model(t, *exp_p))
+            exp_p, _ = curve_fit(exp_model, t, cum, p0=(1.0, 0.1), maxfev=10000)
+            ssr_by_model['exponential'] = (ssr(cum, exp_model(t, *exp_p)), 2)
         except (RuntimeError, ValueError):
-            exp_r2 = float('nan')
+            ssr_by_model['exponential'] = (nan, 2)
 
-        # Gompertz: cum = K * exp(-b * exp(-c*t)).
+        # Gompertz: cum = K*exp(-b*exp(-c*t)) (3 params).
         def gompertz(x, K, b, c):
             return K * np.exp(-b * np.exp(-c * x))
         K_guess = max(cum[-1] * 1.5, 100.0)
+        saturation = nan
+        gompertz_K = nan
         try:
-            g_p, _ = curve_fit(gompertz, t, cum,
-                               p0=(K_guess, 5.0, 0.2), maxfev=20000,
-                               bounds=([cum[-1], 0.1, 0.01],
-                                       [cum[-1] * 100, 50.0, 5.0]))
-            g_r2 = r2(cum, gompertz(t, *g_p))
-            saturation = float(cum[-1] / g_p[0]) if g_p[0] > 0 else float('nan')
+            g_p, _ = curve_fit(gompertz, t, cum, p0=(K_guess, 5.0, 0.2), maxfev=20000,
+                               bounds=([cum[-1], 0.1, 0.01], [cum[-1] * 100, 50.0, 5.0]))
+            ssr_by_model['gompertz'] = (ssr(cum, gompertz(t, *g_p)), 3)
+            gompertz_K = float(g_p[0])
+            saturation = float(cum[-1] / g_p[0]) if g_p[0] > 0 else nan
         except (RuntimeError, ValueError):
-            g_r2 = float('nan')
-            saturation = float('nan')
+            ssr_by_model['gompertz'] = (nan, 3)
 
-        return {
-            'linear_r2': float(linear_r2),
-            'exponential_r2': float(exp_r2),
-            'gompertz_r2': float(g_r2),
-            'saturation_ratio': float(saturation),
-            'cumulative_at_last_year': float(cum[-1]),
-            'years_observed': int(len(years)),
-        }
+        # Bi-logistic: two additive logistic waves (Meyer 1994), 6 params.
+        def bilogistic(x, L1, k1, t1, L2, k2, t2):
+            w1 = L1 / (1.0 + np.exp(-np.clip(k1 * (x - t1), -50, 50)))
+            w2 = L2 / (1.0 + np.exp(-np.clip(k2 * (x - t2), -50, 50)))
+            return w1 + w2
+        T = float(t.max())
+        bilogistic_asymptote = nan
+        try:
+            bl_p, _ = curve_fit(
+                bilogistic, t, cum,
+                p0=(cum[-1] * 0.5, 0.4, T * 0.45, cum[-1] * 0.5, 0.4, T * 0.85),
+                maxfev=40000,
+                bounds=([0, 0.01, 0, 0, 0.01, 0],
+                        [cum[-1] * 5, 5.0, T * 1.5, cum[-1] * 5, 5.0, T * 1.5]),
+            )
+            ssr_by_model['bilogistic'] = (ssr(cum, bilogistic(t, *bl_p)), 6)
+            bilogistic_asymptote = float(bl_p[0] + bl_p[3])
+        except (RuntimeError, ValueError):
+            ssr_by_model['bilogistic'] = (nan, 6)
+
+        # R² + AIC/BIC per model; pick best by AIC.
+        best_model, best_aic = None, np.inf
+        for name, (ss, k) in ssr_by_model.items():
+            results[f'{name}_r2'] = float(r2_from_ssr(ss)) if np.isfinite(ss) else nan
+            a, b = aic_bic(ss, k)
+            results[f'{name}_aic'] = a
+            results[f'{name}_bic'] = b
+            if np.isfinite(a) and a < best_aic:
+                best_aic, best_model = a, name
+
+        results['saturation_ratio'] = saturation
+        results['gompertz_asymptote'] = gompertz_K
+        results['bilogistic_asymptote'] = bilogistic_asymptote
+        results['best_model'] = best_model
+        results['delta_aic_bilogistic_minus_gompertz'] = (
+            results['bilogistic_aic'] - results['gompertz_aic']
+            if np.isfinite(results.get('bilogistic_aic', nan))
+            and np.isfinite(results.get('gompertz_aic', nan)) else nan)
+        return results
 
     def get_top_authors(self, n: int = 10) -> pd.DataFrame:
         """Get top authors by publication count and citations."""
@@ -593,11 +744,12 @@ class ScopusAnalyzer:
 
         for keywords in self.df[keyword_col].dropna():
             for kw in str(keywords).split(';'):
-                kw = kw.strip().lower()
+                kw = _canonicalise_keyword(kw)
                 if kw:
                     keyword_counts[kw] += 1
 
-        return dict(sorted(keyword_counts.items(), key=lambda x: x[1], reverse=True))
+        # Sort by count desc, then key asc, for a deterministic ordering on ties.
+        return dict(sorted(keyword_counts.items(), key=lambda x: (-x[1], x[0])))
 
 
 # Country-name normalisation. Scopus exports use heterogeneous spellings
@@ -839,15 +991,26 @@ class SensitivityAnalyzer:
     @classmethod
     def from_corpus_keywords(cls, df: pd.DataFrame,
                              keyword_col: str = 'Author Keywords',
-                             min_occ: int = 1) -> nx.Graph:
+                             min_occ: int = 1,
+                             canonicalise: bool = True) -> nx.Graph:
         """Build a keyword co-occurrence graph directly from the Scopus dataframe.
 
         Useful for sweeping min_occ (which is baked into the VOSViewer export
         and otherwise un-tunable post-hoc).
+
+        ``canonicalise`` applies the thesaurus + lemmatiser normalisation
+        (``_canonicalise_keyword``) so singular/plural and synonym variants
+        collapse to one node (reviewer R2 minor #3). Set ``False`` to reproduce
+        the un-normalised graph for the with/without robustness comparison.
+
+        Nodes and edges are inserted in *sorted* order so the resulting graph —
+        and hence the order-sensitive Louvain partition — is byte-identical
+        regardless of ``PYTHONHASHSEED``.
         """
+        norm = _canonicalise_keyword if canonicalise else (lambda k: k.strip().lower())
         per_doc_keywords = []
         for raw in df[keyword_col].dropna():
-            kws = {kw.strip().lower() for kw in str(raw).split(';') if kw.strip()}
+            kws = {c for c in (norm(kw) for kw in str(raw).split(';') if kw.strip()) if c}
             if kws:
                 per_doc_keywords.append(kws)
 
@@ -868,11 +1031,12 @@ class SensitivityAnalyzer:
                 for b in kept[i + 1:]:
                     co[(a, b)] += 1
 
+        # Sorted insertion → deterministic node/edge order (see _set_global_seed).
         G = nx.Graph()
-        for kw in keep:
+        for kw in sorted(keep):
             G.add_node(kw, occurrences=occ[kw], label=kw)
-        for (a, b), w in co.items():
-            G.add_edge(a, b, weight=w)
+        for (a, b) in sorted(co):
+            G.add_edge(a, b, weight=co[(a, b)])
         return G
 
     def parameter_sweep(self,
@@ -1008,6 +1172,96 @@ class SensitivityAnalyzer:
             'n_bootstrap': len(means),
         }
 
+    # ------------------------------------------------------------------
+    # Alternative community-detection algorithms (reviewer R1 #5).
+    # Louvain is compared against Leiden (guarantees well-connected communities,
+    # Traag et al. 2019) and Infomap (map-equation flow model, Rosvall &
+    # Bergstrom 2008). All three are seeded for byte-identical output; nodes are
+    # sorted so the igraph/Infomap index mapping is deterministic.
+    # ------------------------------------------------------------------
+    def _sorted_index(self) -> Tuple[List[Any], Dict[Any, int]]:
+        nodes = sorted(self.base_graph.nodes())
+        return nodes, {n: i for i, n in enumerate(nodes)}
+
+    def partition_leiden(self, gamma: float = 1.0, seed: int = RANDOM_SEED,
+                         n_iterations: int = -1) -> Optional[List[set]]:
+        """Leiden partition (RBConfiguration ≈ Louvain resolution). None if unavailable."""
+        try:
+            import igraph as ig
+            import leidenalg
+        except Exception:
+            warnings.warn("leidenalg/igraph unavailable; skipping Leiden comparison.")
+            return None
+        nodes, idx = self._sorted_index()
+        edges, weights = [], []
+        for u, v, d in self.base_graph.edges(data=True):
+            edges.append((idx[u], idx[v]))
+            weights.append(float(d.get('weight', 1.0)))
+        g = ig.Graph(n=len(nodes), edges=edges)
+        if weights:
+            g.es['weight'] = weights
+        part = leidenalg.find_partition(
+            g, leidenalg.RBConfigurationVertexPartition,
+            weights='weight' if weights else None,
+            resolution_parameter=gamma, seed=seed, n_iterations=n_iterations,
+        )
+        return [set(nodes[i] for i in comm) for comm in part]
+
+    def partition_infomap(self, seed: int = RANDOM_SEED,
+                          num_trials: int = 10) -> Optional[List[set]]:
+        """Infomap (map-equation) partition. None if the package is unavailable."""
+        try:
+            from infomap import Infomap
+        except Exception:
+            warnings.warn("infomap unavailable; skipping Infomap comparison.")
+            return None
+        nodes, idx = self._sorted_index()
+        im = Infomap(f"--two-level --silent --seed {seed} --num-trials {num_trials}")
+        for u, v, d in self.base_graph.edges(data=True):
+            im.add_link(idx[u], idx[v], float(d.get('weight', 1.0)))
+        im.run()
+        modules: Dict[Any, set] = defaultdict(set)
+        assigned = im.get_modules()
+        for i, n in enumerate(nodes):
+            mid = assigned.get(i, ('iso', i))
+            modules[mid].add(n)
+        return list(modules.values())
+
+    def algorithm_agreement(self, gamma: float = 1.0,
+                            seed: int = RANDOM_SEED) -> Dict[str, Any]:
+        """Compare Louvain / Leiden / Infomap on the base graph.
+
+        Returns per-algorithm cluster count + modularity and the ARI of Leiden
+        and Infomap against the Louvain baseline (reuses ``compute_ari_matrix``).
+        """
+        parts: Dict[str, List[set]] = {}
+        louv = self.parameter_sweep((gamma,), seed=seed).get(gamma, [])
+        if louv:
+            parts['louvain'] = louv
+        lei = self.partition_leiden(gamma=gamma, seed=seed)
+        if lei is not None:
+            parts['leiden'] = lei
+        inf = self.partition_infomap(seed=seed)
+        if inf is not None:
+            parts['infomap'] = inf
+
+        summary = {}
+        for name, p in parts.items():
+            try:
+                mod = community.modularity(self.base_graph, p, weight='weight')
+            except Exception:
+                mod = float('nan')
+            summary[name] = {'n_clusters': len(p), 'modularity': float(mod)}
+
+        ari = self.compute_ari_matrix(parts, baseline_key='louvain') \
+            if 'louvain' in parts else {'ari': {}}
+        return {
+            'gamma': gamma,
+            'baseline': 'louvain',
+            'summary': summary,
+            'ari_vs_louvain': ari.get('ari', {}),
+        }
+
     def to_json(self,
                 gammas: Tuple[float, ...] = DEFAULT_GAMMAS,
                 df: Optional[pd.DataFrame] = None,
@@ -1025,6 +1279,7 @@ class SensitivityAnalyzer:
             gamma_partitions, baseline_key=1.0,
         )
         out['bootstrap_stability_gamma_1'] = self.bootstrap_jaccard_ci(gamma=1.0)
+        out['algorithm_agreement'] = self.algorithm_agreement(gamma=1.0)
 
         if df is not None:
             mo_partitions = self.parameter_sweep_min_occ(
@@ -1036,6 +1291,125 @@ class SensitivityAnalyzer:
             out['cluster_counts_by_min_occ'] = {str(mo): len(p) for mo, p in mo_partitions.items()}
 
         return out
+
+
+def compute_normalization_effect(df: pd.DataFrame,
+                                 keyword_col: str = 'Author Keywords',
+                                 min_occ: int = 3,
+                                 gamma: float = 1.0,
+                                 seed: int = RANDOM_SEED) -> Dict[str, Any]:
+    """Quantify the effect of thesaurus+lemmatiser keyword normalisation.
+
+    Answers reviewer R2 (minor #3) with evidence, not just a claim: reports how
+    many raw variants collapse, the node/edge and cluster-count change, the
+    largest merges, and an Adjusted Rand Index between the un-normalised and
+    normalised Louvain partitions (mapping each raw term to its canonical form)
+    to show that consolidation does not destabilise the thematic structure.
+    """
+    raw_g = SensitivityAnalyzer.from_corpus_keywords(df, keyword_col, min_occ, canonicalise=False)
+    can_g = SensitivityAnalyzer.from_corpus_keywords(df, keyword_col, min_occ, canonicalise=True)
+
+    # Group raw variants by their canonical form to surface the largest merges.
+    merges: Dict[str, set] = defaultdict(set)
+    for raw in df[keyword_col].dropna():
+        for kw in str(raw).split(';'):
+            r = kw.strip().lower()
+            c = _canonicalise_keyword(kw)
+            if c:
+                merges[c].add(r)
+    multi = {c: sorted(v) for c, v in merges.items() if len(v) > 1}
+    top_merges = sorted(multi.items(), key=lambda x: -len(x[1]))[:15]
+
+    p_raw = community.louvain_communities(raw_g, weight='weight', resolution=gamma, seed=seed)
+    p_can = community.louvain_communities(can_g, weight='weight', resolution=gamma, seed=seed)
+    raw_label = {n: i for i, c in enumerate(p_raw) for n in c}
+    can_label = {n: i for i, c in enumerate(p_can) for n in c}
+    shared = [n for n in raw_g.nodes()
+              if n in raw_label and _canonicalise_keyword(n) in can_label]
+    ari = _adjusted_rand_index(
+        [raw_label[n] for n in shared],
+        [can_label[_canonicalise_keyword(n)] for n in shared],
+    ) if len(shared) >= 2 else float('nan')
+
+    return {
+        'min_occ': min_occ,
+        'raw_nodes': raw_g.number_of_nodes(),
+        'raw_edges': raw_g.number_of_edges(),
+        'normalised_nodes': can_g.number_of_nodes(),
+        'normalised_edges': can_g.number_of_edges(),
+        'nodes_merged_away': raw_g.number_of_nodes() - can_g.number_of_nodes(),
+        'n_canonical_terms_with_merges': len(multi),
+        'raw_clusters': len(p_raw),
+        'normalised_clusters': len(p_can),
+        'ari_raw_vs_normalised': ari,
+        'top_merges': [{'canonical': c, 'variants': v} for c, v in top_merges],
+    }
+
+
+INDUSTRY_TERM_FAMILIES: Dict[str, List[str]] = {
+    # Industry-salient topics the reviewer (R2 major #3) flags as peripheral/absent.
+    'mobile': ['mobile', 'mobile game', 'mobile development', 'mobile learning',
+               'android', 'ios', 'smartphone', 'mobile application', 'app development'],
+    'generative_ai': ['generative ai', 'large language model', 'chatgpt', 'gpt',
+                      'llm', 'generative artificial intelligence', 'diffusion model',
+                      'prompt engineering', 'copilot', 'genai'],
+    # Contrast families that ARE central, to calibrate the lag claim.
+    'immersive_xr': ['virtual reality', 'augmented reality', 'mixed reality',
+                     'extended reality', 'metaverse'],
+    'ai_general': ['artificial intelligence', 'machine learning', 'deep learning',
+                   'neural network', 'procedural content generation'],
+}
+
+
+def compute_industry_lag(df: pd.DataFrame,
+                         keyword_col: str = 'Author Keywords',
+                         min_occ: int = 3) -> Dict[str, Any]:
+    """Quantify the academia–industry lag (reviewer R2 major #3) empirically.
+
+    For each term family, contrast three signals: (a) documents whose *author
+    keywords* contain a family term (network-eligible), (b) documents whose
+    *abstract* mentions it (literature presence), and (c) whether any family term
+    reaches ``min_occ`` as an author keyword — i.e. whether it appears as a node
+    in the keyword co-occurrence network at all. A family that is common in
+    abstracts but absent from the keyword network is the lag made measurable.
+    """
+    has_abstract = 'Abstract' in df.columns
+    years = df['Year'] if 'Year' in df.columns else None
+    kw_node_terms = set()
+    if keyword_col in df.columns:
+        kw_node_terms = {n for n in
+                         SensitivityAnalyzer.from_corpus_keywords(df, keyword_col, min_occ).nodes()}
+
+    out: Dict[str, Any] = {'min_occ': min_occ, 'families': {}}
+    for fam, terms in INDUSTRY_TERM_FAMILIES.items():
+        canon_terms = {_canonicalise_keyword(t) for t in terms}
+        kw_docs, abs_docs, recent_abs = set(), set(), set()
+        per_year: Dict[int, int] = defaultdict(int)
+        for idx in df.index:
+            kw_raw = str(df.at[idx, keyword_col]) if keyword_col in df.columns else ''
+            kw_set = {_canonicalise_keyword(k) for k in kw_raw.split(';') if k.strip()}
+            in_kw = bool(kw_set & canon_terms)
+            abstract = str(df.at[idx, 'Abstract']).lower() if has_abstract else ''
+            in_abs = any(t in abstract for t in terms)
+            if in_kw:
+                kw_docs.add(idx)
+            if in_abs:
+                abs_docs.add(idx)
+                if years is not None and pd.notna(years.at[idx]):
+                    yr = int(years.at[idx])
+                    per_year[yr] += 1
+                    if yr >= 2022:
+                        recent_abs.add(idx)
+        network_terms = sorted(kw_node_terms & canon_terms)
+        out['families'][fam] = {
+            'n_docs_author_keyword': len(kw_docs),
+            'n_docs_abstract': len(abs_docs),
+            'n_docs_abstract_2022plus': len(recent_abs),
+            'in_keyword_network': bool(network_terms),
+            'network_terms': network_terms,
+            'abstract_by_year': dict(sorted(per_year.items())),
+        }
+    return out
 
 
 class TheoryOperationalisation:
@@ -1091,38 +1465,55 @@ class TheoryOperationalisation:
         'roblox', 'cocos2d',
     )
 
+    # Single-word platform names that collide with common English words are matched
+    # by a stricter, engine-specific pattern instead of a bare word boundary, so the
+    # English verb/noun "construct" is not counted as the Construct game engine
+    # (reviewer R2 major #1). Match requires a version number, "engine", or the
+    # vendor name "Scirra".
+    _PLATFORM_PATTERNS = {
+        'construct': re.compile(r'\bconstruct\s*(?:2|3|classic|engine|game\s+engine)\b'
+                                r'|\bscirra\b'),
+    }
+
     def __init__(self, df: pd.DataFrame,
-                 keyword_cols: Tuple[str, ...] = ('Author Keywords', 'Index Keywords')):
+                 keyword_cols: Tuple[str, ...] = ('Author Keywords', 'Index Keywords'),
+                 include_abstract: bool = True):
         self.df = df
         self.keyword_cols = keyword_cols
+        # When False, proxies are drawn from keyword columns only (a robustness
+        # variant that isolates author/index keywords from abstract prose).
+        self.include_abstract = include_abstract
 
     def _doc_keyword_text(self, idx: int) -> str:
-        """Concatenate all configured keyword columns for one row, lowercased."""
+        """Concatenate configured keyword columns (and optionally the abstract)."""
         parts = []
         for col in self.keyword_cols:
             if col in self.df.columns:
                 v = self.df.at[idx, col] if idx in self.df.index else None
                 if isinstance(v, str):
                     parts.append(v)
-        # Also include the abstract; keyword sets alone are too sparse for TAM proxies.
-        if 'Abstract' in self.df.columns:
+        # Abstract adds coverage but dilutes keyword-level specificity; optional.
+        if self.include_abstract and 'Abstract' in self.df.columns:
             v = self.df.at[idx, 'Abstract'] if idx in self.df.index else None
             if isinstance(v, str):
                 parts.append(v)
         return ' '.join(parts).lower()
 
     def docs_mentioning(self, platform: str) -> List[int]:
-        """Return doc-ids whose keyword set OR abstract mentions the platform.
+        """Return doc-ids whose keyword set (and optionally abstract) mentions the platform.
 
-        Uses word-boundary matching to avoid false positives (e.g. 'construct'
-        the verb vs the Construct game engine). For multi-word platforms
-        (`unreal engine`) requires the exact phrase.
+        Uses word-boundary matching, except ambiguous single-word platforms use an
+        engine-specific override (``_PLATFORM_PATTERNS``) so the English verb/noun
+        "construct" is not counted as the Construct game engine (reviewer R2 major #1).
+        Multi-word platforms (`unreal engine`) require the exact phrase.
         """
         platform_lc = platform.lower().strip()
-        if ' ' in platform_lc:
-            pattern = re.compile(re.escape(platform_lc))
-        else:
-            pattern = re.compile(r'\b' + re.escape(platform_lc) + r'\b')
+        pattern = self._PLATFORM_PATTERNS.get(platform_lc)
+        if pattern is None:
+            if ' ' in platform_lc:
+                pattern = re.compile(re.escape(platform_lc))
+            else:
+                pattern = re.compile(r'\b' + re.escape(platform_lc) + r'\b')
         out = []
         for idx in self.df.index:
             txt = self._doc_keyword_text(idx)
@@ -1241,14 +1632,43 @@ class TheoryOperationalisation:
         rho, n = self._spearman_rho(pu, cites)
         return {'rho': rho, 'n': n, 'platforms': list(scores.keys())}
 
+    @staticmethod
+    def variant_hypothesis_tests(df: pd.DataFrame, graph: nx.Graph,
+                                 platforms: Tuple[str, ...] = DEFAULT_PLATFORMS
+                                 ) -> Dict[str, Any]:
+        """Re-run H1-H3 under three proxy sources to test whether the nulls are an
+        artefact of one keyword source (reviewer R2 major #1): author keywords only,
+        index keywords only, and keywords+abstract.
+        """
+        configs = {
+            'author_keywords_only': dict(keyword_cols=('Author Keywords',),
+                                         include_abstract=False),
+            'index_keywords_only': dict(keyword_cols=('Index Keywords',),
+                                        include_abstract=False),
+            'keywords_plus_abstract': dict(
+                keyword_cols=('Author Keywords', 'Index Keywords'),
+                include_abstract=True),
+        }
+        out: Dict[str, Any] = {}
+        for name, kw in configs.items():
+            t = TheoryOperationalisation(df, **kw)
+            out[name] = {
+                'h1': t.test_h1_rogers_vs_centrality(graph, platforms),
+                'h2': t.test_h2_rogers_vs_year(platforms),
+                'h3': t.test_h3_tam_vs_citations(platforms),
+                'n_platforms_detected': len(t.score_platforms(platforms)),
+            }
+        return out
+
     def to_json(self, graph: nx.Graph,
                 platforms: Tuple[str, ...] = DEFAULT_PLATFORMS) -> Dict[str, Any]:
-        """Serialise per-platform scores + the three hypothesis tests."""
+        """Serialise per-platform scores + the three hypothesis tests + variants."""
         return {
             'platform_scores': self.score_platforms(platforms),
             'h1_rogers_vs_centrality': self.test_h1_rogers_vs_centrality(graph, platforms),
             'h2_rogers_vs_year': self.test_h2_rogers_vs_year(platforms),
             'h3_tam_vs_citations': self.test_h3_tam_vs_citations(platforms),
+            'proxy_source_variants': self.variant_hypothesis_tests(self.df, graph, platforms),
         }
 
 
@@ -1626,9 +2046,11 @@ class ThematicMapAnalyzer:
                     else:
                         external += w
             density = internal / max(len(members), 1)
+            # Secondary key on the label breaks occurrence ties deterministically
+            # (member iteration is set-ordered → PYTHONHASHSEED-dependent otherwise).
             label_keywords = sorted(
                 ((n, self.graph.nodes[n].get('occurrences', 0)) for n in members),
-                key=lambda x: -x[1],
+                key=lambda x: (-x[1], x[0]),
             )[:5]
             out.append({
                 'cluster_id': cid,
@@ -2215,6 +2637,42 @@ def run_full_analysis(data_dir: str, output_dir: str) -> Dict[str, Any]:
         except Exception as exc:
             warnings.warn(f"TemporalCouplingAnalyzer failed: {exc}")
 
+        # 2026 partial-year robustness (reviewers R1.3 / R2.2): re-fit growth and
+        # temporal coupling on the corpus capped at 2025 and report the deltas.
+        try:
+            scopus_2025 = ScopusAnalyzer(str(primary), year_max=2025)
+            comp_full = results['scopus'].get('completeness', {})
+            comp_2025 = scopus_2025.compute_field_completeness_score()
+            tc_2025 = TemporalCouplingAnalyzer(scopus_2025.df).to_json(
+                eras=(('pre-2018', None, 2017), ('2018-2021', 2018, 2021),
+                      ('2022-2025', 2022, 2025)))
+            growth_keys = ('best_model', 'gompertz_r2', 'bilogistic_r2', 'saturation_ratio',
+                           'gompertz_asymptote', 'bilogistic_asymptote',
+                           'delta_aic_bilogistic_minus_gompertz')
+            n_2026 = int((scopus.df['Year'] == 2026).sum()) if 'Year' in scopus.df.columns else 0
+            robustness = {
+                'n_docs_full': int(len(scopus.df)),
+                'n_docs_no2026': int(len(scopus_2025.df)),
+                'n_2026_dropped': n_2026,
+                'growth_full': {k: comp_full.get(k) for k in growth_keys},
+                'growth_no2026': {k: comp_2025.get(k) for k in growth_keys},
+                'temporal_coupling_no2026': {
+                    era: {'n_docs': info['n_docs'],
+                          'n_coupling_edges': info['n_coupling_edges'],
+                          'density': info['density']}
+                    for era, info in tc_2025['eras'].items()},
+                'kendall_tau_no2026': tc_2025['comparison']['kendall_tau'],
+            }
+            (processed_dir / 'robustness_no2026.json').write_text(
+                json.dumps(robustness, indent=2, ensure_ascii=False, default=str),
+                encoding='utf-8')
+            results['robustness_no2026'] = robustness
+            print(f"  Created: robustness_no2026.json (dropped {n_2026} 2026 docs; "
+                  f"best_model full={comp_full.get('best_model')} / "
+                  f"no2026={comp_2025.get('best_model')})")
+        except Exception as exc:
+            warnings.warn(f"2026 robustness variant failed: {exc}")
+
         # Build the keyword co-occurrence network directly from the corpus
         # (the VOSViewer cosco5 export reflects only the 88-doc corpus).
         kw_graph = SensitivityAnalyzer.from_corpus_keywords(scopus.df, min_occ=3)
@@ -2235,6 +2693,21 @@ def run_full_analysis(data_dir: str, output_dir: str) -> Dict[str, Any]:
             encoding='utf-8',
         )
         print(f"  Created: keyword_network.json ({kw_graph.number_of_nodes()} nodes, {kw_graph.number_of_edges()} edges)")
+
+        # Keyword-normalisation robustness (R2 minor #3): with/without thesaurus.
+        try:
+            norm_effect = compute_normalization_effect(scopus.df, min_occ=3)
+            (processed_dir / 'normalization_effect.json').write_text(
+                json.dumps(norm_effect, indent=2, ensure_ascii=False, default=str),
+                encoding='utf-8',
+            )
+            results['normalization_effect'] = norm_effect
+            print(f"  Created: normalization_effect.json "
+                  f"({norm_effect['raw_nodes']}->{norm_effect['normalised_nodes']} nodes, "
+                  f"{norm_effect['raw_clusters']}->{norm_effect['normalised_clusters']} clusters, "
+                  f"ARI={norm_effect['ari_raw_vs_normalised']:.3f})")
+        except Exception as exc:
+            warnings.warn(f"compute_normalization_effect failed: {exc}")
 
         # Cluster-stability sensitivity (G2) — on corpus-built keyword graph.
         try:
@@ -2268,6 +2741,20 @@ def run_full_analysis(data_dir: str, output_dir: str) -> Dict[str, Any]:
             print(f"  Created: theory_tests.json")
         except Exception as exc:
             warnings.warn(f"TheoryOperationalisation failed: {exc}")
+
+        # Industry–academia lag (R2 major #3): mobile / generative-AI term families.
+        try:
+            lag = compute_industry_lag(scopus.df, min_occ=3)
+            (processed_dir / 'industry_lag.json').write_text(
+                json.dumps(lag, indent=2, ensure_ascii=False, default=str), encoding='utf-8')
+            results['industry_lag'] = lag
+            fams = lag['families']
+            print("  Created: industry_lag.json (" + ", ".join(
+                f"{k}: kw={v['n_docs_author_keyword']}/abs={v['n_docs_abstract']}"
+                f"{'*innet' if v['in_keyword_network'] else '/absent'}"
+                for k, v in fams.items()) + ")")
+        except Exception as exc:
+            warnings.warn(f"compute_industry_lag failed: {exc}")
 
         # bibliometrix-standard analytical menu (Lotka, Bradford, Thematic, Trend, ThreeField).
         try:

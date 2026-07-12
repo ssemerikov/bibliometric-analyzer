@@ -1,0 +1,134 @@
+{
+  "min_occ": 3,
+  "raw_nodes": 309,
+  "raw_edges": 2298,
+  "normalised_nodes": 304,
+  "normalised_edges": 2305,
+  "nodes_merged_away": 5,
+  "n_canonical_terms_with_merges": 90,
+  "raw_clusters": 10,
+  "normalised_clusters": 8,
+  "ari_raw_vs_normalised": 0.375321112869045,
+  "top_merges": [
+    {
+      "canonical": "game-based learning",
+      "variants": [
+        "game based learning",
+        "game-based learning",
+        "game-based learning (gbl)",
+        "game-based-learning",
+        "gamebased learning",
+        "games based learning",
+        "games-based learning"
+      ]
+    },
+    {
+      "canonical": "game development",
+      "variants": [
+        "game design and development",
+        "game development",
+        "game developments",
+        "game-development",
+        "games development",
+        "video game development"
+      ]
+    },
+    {
+      "canonical": "unity",
+      "variants": [
+        "unity",
+        "unity 3d",
+        "unity game engine",
+        "unity3d"
+      ]
+    },
+    {
+      "canonical": "gamification",
+      "variants": [
+        "gamification",
+        "gamification of learning",
+        "gamified learning"
+      ]
+    },
+    {
+      "canonical": "unreal engine",
+      "variants": [
+        "unreal",
+        "unreal engine",
+        "unreal engine 5"
+      ]
+    },
+    {
+      "canonical": "generative ai",
+      "variants": [
+        "genai",
+        "generative ai",
+        "generative artificial intelligence"
+      ]
+    },
+    {
+      "canonical": "large language model",
+      "variants": [
+        "large language model",
+        "large language models",
+        "llms"
+      ]
+    },
+    {
+      "canonical": "educational game",
+      "variants": [
+        "educational game",
+        "educational games"
+      ]
+    },
+    {
+      "canonical": "learning environment",
+      "variants": [
+        "learning environment",
+        "learning environments"
+      ]
+    },
+    {
+      "canonical": "learning technology",
+      "variants": [
+        "learning technologies",
+        "learning technology"
+      ]
+    },
+    {
+      "canonical": "game",
+      "variants": [
+        "game",
+        "games"
+      ]
+    },
+    {
+      "canonical": "mobile game",
+      "variants": [
+        "mobile game",
+        "mobile games"
+      ]
+    },
+    {
+      "canonical": "video game",
+      "variants": [
+        "video game",
+        "video games"
+      ]
+    },
+    {
+      "canonical": "robot",
+      "variants": [
+        "robot",
+        "robots"
+      ]
+    },
+    {
+      "canonical": "serious game",
+      "variants": [
+        "serious game",
+        "serious games"
+      ]
+    }
+  ]
+}

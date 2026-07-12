@@ -66,17 +66,17 @@
       "avg_citations": 3.6666666666666665
     },
     "construct": {
-      "n_docs": 27,
-      "rogers_relative_advantage": 0.021604938271604937,
-      "rogers_compatibility": 0.02356902356902357,
-      "rogers_low_complexity": 0.022222222222222227,
-      "rogers_trialability": 0.0411522633744856,
-      "rogers_observability": 0.012345679012345678,
-      "rogers_total": 0.120894126449682,
-      "tam_perceived_usefulness": 0.05092592592592592,
-      "tam_perceived_ease_of_use": 0.02645502645502645,
-      "avg_pub_year": 2019.4074074074074,
-      "avg_citations": 14.296296296296296
+      "n_docs": 5,
+      "rogers_relative_advantage": 0.016666666666666666,
+      "rogers_compatibility": 0.0,
+      "rogers_low_complexity": 0.02,
+      "rogers_trialability": 0.0,
+      "rogers_observability": 0.0,
+      "rogers_total": 0.03666666666666667,
+      "tam_perceived_usefulness": 0.025,
+      "tam_perceived_ease_of_use": 0.02857142857142857,
+      "avg_pub_year": 2020.0,
+      "avg_citations": 2.4
     },
     "roblox": {
       "n_docs": 1,
@@ -111,19 +111,19 @@
     "pairs": [
       [
         0.22254503800895553,
-        0.10064935064935066,
+        0.14521452145214522,
         "unity"
       ],
       [
         0.27367424242424243,
-        0.022727272727272728,
+        0.033003300330033,
         "unreal engine"
       ]
     ],
     "note": "Too few platforms with corpus mentions AND graph nodes for correlation."
   },
   "h2_rogers_vs_year": {
-    "rho": -0.23952525238265177,
+    "rho": -0.11976262619132588,
     "n": 8,
     "platforms": [
       "unity",
@@ -137,7 +137,7 @@
     ]
   },
   "h3_tam_vs_citations": {
-    "rho": 0.203596464525254,
+    "rho": 0.4311454542887732,
     "n": 8,
     "platforms": [
       "unity",
@@ -149,5 +149,145 @@
       "roblox",
       "cocos2d"
     ]
+  },
+  "proxy_source_variants": {
+    "author_keywords_only": {
+      "h1": {
+        "rho": NaN,
+        "n": 2,
+        "pairs": [
+          [
+            0.003125,
+            0.14521452145214522,
+            "unity"
+          ],
+          [
+            0.027777777777777776,
+            0.033003300330033,
+            "unreal engine"
+          ]
+        ],
+        "note": "Too few platforms with corpus mentions AND graph nodes for correlation."
+      },
+      "h2": {
+        "rho": 0.4674734950042286,
+        "n": 7,
+        "platforms": [
+          "unity",
+          "unreal",
+          "unreal engine",
+          "godot",
+          "gamemaker",
+          "construct",
+          "roblox"
+        ]
+      },
+      "h3": {
+        "rho": 0.0,
+        "n": 7,
+        "platforms": [
+          "unity",
+          "unreal",
+          "unreal engine",
+          "godot",
+          "gamemaker",
+          "construct",
+          "roblox"
+        ]
+      },
+      "n_platforms_detected": 7
+    },
+    "index_keywords_only": {
+      "h1": {
+        "rho": NaN,
+        "n": 2,
+        "pairs": [
+          [
+            0.019312169312169312,
+            0.14521452145214522,
+            "unity"
+          ],
+          [
+            0.027777777777777776,
+            0.033003300330033,
+            "unreal engine"
+          ]
+        ],
+        "note": "Too few platforms with corpus mentions AND graph nodes for correlation."
+      },
+      "h2": {
+        "rho": 0.27941176470588236,
+        "n": 6,
+        "platforms": [
+          "unity",
+          "unreal",
+          "unreal engine",
+          "godot",
+          "gamemaker",
+          "construct"
+        ]
+      },
+      "h3": {
+        "rho": 0.39279220242478635,
+        "n": 6,
+        "platforms": [
+          "unity",
+          "unreal",
+          "unreal engine",
+          "godot",
+          "gamemaker",
+          "construct"
+        ]
+      },
+      "n_platforms_detected": 6
+    },
+    "keywords_plus_abstract": {
+      "h1": {
+        "rho": NaN,
+        "n": 2,
+        "pairs": [
+          [
+            0.22254503800895553,
+            0.14521452145214522,
+            "unity"
+          ],
+          [
+            0.27367424242424243,
+            0.033003300330033,
+            "unreal engine"
+          ]
+        ],
+        "note": "Too few platforms with corpus mentions AND graph nodes for correlation."
+      },
+      "h2": {
+        "rho": -0.11976262619132588,
+        "n": 8,
+        "platforms": [
+          "unity",
+          "unreal",
+          "unreal engine",
+          "godot",
+          "gamemaker",
+          "construct",
+          "roblox",
+          "cocos2d"
+        ]
+      },
+      "h3": {
+        "rho": 0.4311454542887732,
+        "n": 8,
+        "platforms": [
+          "unity",
+          "unreal",
+          "unreal engine",
+          "godot",
+          "gamemaker",
+          "construct",
+          "roblox",
+          "cocos2d"
+        ]
+      },
+      "n_platforms_detected": 8
+    }
   }
 }

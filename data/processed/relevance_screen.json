@@ -1,0 +1,27 @@
+{
+  "n_total": 1511,
+  "n_retained": 1374,
+  "n_flagged": 137,
+  "retention_rate": 0.9093,
+  "flag_rate": 0.0907,
+  "missing_edu_term": 16,
+  "missing_gamedev_term": 123,
+  "rule": "retain iff (title+abstract) contains an education-intent term AND a game-development term",
+  "flagged_examples": [
+    "From Coding to Creativity: Using Dancing Sphero Robots to Inspire STEM Learning",
+    "Learning C# Through Small Projects",
+    "A Versatile Tool for Haptic Feedback Design Towards Enhancing User Experience in Virtual Reality Applications",
+    "Proceedings - SIGGRAPH 2022 Educator''s Forum",
+    "Towards Development of Innovative Software Platform for Serious Educational Games with Creative Visualization in Selected Eco-context",
+    "Future Education: Experimenting with Chemical Reactions in Virtual Reality",
+    "10th RSI International Conference on Robotics and Mechatronics, ICRoM 2022",
+    "Ecosystem Simulator: A Learning Game About Genetic Algorithms",
+    "Merits and Demerits of Unreal and Unity: A Comprehensive Comparison",
+    "Design, Implementation and Evaluation of Educational Aid Game for Differential Diagnosis of Oral Lesions Through Mobile Learning",
+    "XR Immersion for teaching and learning with precise alignment guidance in user perspective",
+    "Pushing the boundaries of immersion and storytelling: A technical review of Unreal Engine",
+    "Bigger but Are They Better? Investigating Growth, Maturation, and Physical Performance Metrics in Underage Gaelic Games Development Squads",
+    "FOES Sparking Programming Interest in Non-IT Students Through a JavaScript Fighting Game",
+    "Development of Bom Translasi Game as Teaching Aid on the Topic of Transformation in Mathematics Form Two"
+  ]
+}

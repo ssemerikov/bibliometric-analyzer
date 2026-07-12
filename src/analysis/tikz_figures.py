@@ -131,6 +131,40 @@ def emit_publication_timeline(by_year: pd.DataFrame, completeness: Dict[str, Any
         except Exception:
             gomp = ""
 
+    # Bi-logistic (two-wave) prediction overlay (Meyer 1994), re-fit for the curve.
+    bilo = ""
+    if completeness and not math.isnan(completeness.get("bilogistic_r2", float("nan"))):
+        from scipy.optimize import curve_fit
+        years = df["Year"].astype(float).to_numpy()
+        cum_arr = np.array(cum, dtype=float)
+        t = years - years.min()
+        T = float(t.max())
+        try:
+            def bilogistic(x, L1, k1, t1, L2, k2, t2):
+                w1 = L1 / (1.0 + np.exp(-np.clip(k1 * (x - t1), -50, 50)))
+                w2 = L2 / (1.0 + np.exp(-np.clip(k2 * (x - t2), -50, 50)))
+                return w1 + w2
+            p, _ = curve_fit(
+                bilogistic, t, cum_arr,
+                p0=(cum_arr[-1] * 0.5, 0.4, T * 0.45, cum_arr[-1] * 0.5, 0.4, T * 0.85),
+                maxfev=40000,
+                bounds=([0, 0.01, 0, 0, 0.01, 0],
+                        [cum_arr[-1] * 5, 5.0, T * 1.5, cum_arr[-1] * 5, 5.0, T * 1.5]))
+            ts = np.linspace(0, t.max() + 5, 80)
+            ys = bilogistic(ts, *p)
+            yrs_smooth = years.min() + ts
+            bilo_lines = "\n".join(f"  {y:.2f}  {v:.2f}" for y, v in zip(yrs_smooth, ys))
+            best = completeness.get("best_model", "")
+            star = " (AIC-preferred)" if best == "bilogistic" else ""
+            bilo = f"""
+\\addplot[smooth, thick, dashed, draw=violet!80!black]
+  table[x index=0, y index=1] {{
+{bilo_lines}
+  }};
+\\addlegendentry{{Bi-logistic, $R^{{2}}={completeness['bilogistic_r2']:.3f}${star}}}"""
+        except Exception:
+            bilo = ""
+
     body = f"""\\begin{{tikzpicture}}
 \\begin{{axis}}[
   width=0.99\\linewidth, height=6.2cm,
@@ -160,7 +194,7 @@ def emit_publication_timeline(by_year: pd.DataFrame, completeness: Dict[str, Any
   table[x index=0, y index=1] {{
 {cum_rows}
   }};
-\\addlegendentry{{Cumulative}}{gomp}
+\\addlegendentry{{Cumulative}}{gomp}{bilo}
 \\end{{axis}}
 \\end{{tikzpicture}}"""
     return _emit("F01_publication_timeline", body)
@@ -362,7 +396,7 @@ def emit_lotka_fit(lotka: Dict[str, Any]) -> Path:
   table[x index=0, y index=1] {{
 {fit_rows}
   }};
-\\addlegendentry{{Lotka fit, $\\alpha={alpha:.2f}$, $R^2={r2:.3f}$}}
+\\addlegendentry{{Lotka fit, $\\alpha={alpha:.2f}$, $R^{2}={r2:.3f}$}}
 \\end{{axis}}
 \\end{{tikzpicture}}"""
     return _emit("F07_lotka_fit", body)
@@ -496,8 +530,13 @@ def emit_keyword_network(keyword_network: Dict[str, Any], top_n: int = 40,
         edge_lines.append(f"\\draw[gray, line width={lw:.2f}pt, opacity={opacity:.2f}] "
                           f"({x1:.3f},{y1:.3f}) -- ({x2:.3f},{y2:.3f});")
 
+    # Draw every node; then place labels with greedy collision-avoidance and a
+    # radial outward offset so peripheral labels do not pile up on the dense core
+    # (reviewer R2 minor #2). Labels are prioritised by occurrence then degree.
+    deg = dict(G.degree())
+    ranked = sorted(nodes, key=lambda n: (-n["occurrences"], -deg.get(n["label"], 0)))
+
     node_lines = []
-    label_lines = []
     for n in nodes:
         x, y = norm_pos[n["label"]]
         size = 1.5 + 7.0 * math.sqrt(n["occurrences"] / max_occ)
@@ -505,13 +544,31 @@ def emit_keyword_network(keyword_network: Dict[str, Any], top_n: int = 40,
             f"\\filldraw[fill=blue!50!black, fill opacity=0.55, draw=blue!70!black, "
             f"line width=0.3pt] ({x:.3f},{y:.3f}) circle ({size:.2f}pt);"
         )
-        # Label only the largest 18 nodes.
-        if n["occurrences"] >= sorted(nn["occurrences"] for nn in nodes)[-18]:
-            label_lines.append(
-                f"\\node[font=\\tiny, anchor=south, fill=white, fill opacity=0.7, "
-                f"text opacity=1, inner sep=0.5pt] at ({x:.3f},{y:.3f}+0.05) "
-                f"{{{_esc(n['label'])}}};"
-            )
+
+    cx = sum(p[0] for p in norm_pos.values()) / max(len(norm_pos), 1)
+    cy = sum(p[1] for p in norm_pos.values()) / max(len(norm_pos), 1)
+    MIN_LABEL_DIST = 0.60   # min separation between placed label anchors (cm)
+    MAX_LABELS = 24
+    placed = []
+    label_lines = []
+    for n in ranked:
+        if len(placed) >= MAX_LABELS:
+            break
+        x, y = norm_pos[n["label"]]
+        dx, dy = x - cx, y - cy
+        r = math.hypot(dx, dy) or 1.0
+        # Push peripheral labels further out than central ones.
+        off = 0.10 + 0.12 * min(r / (SCALE_X / 2), 1.0)
+        lx, ly = x + dx / r * off, y + dy / r * off
+        if any(math.hypot(lx - px, ly - py) < MIN_LABEL_DIST for px, py in placed):
+            continue
+        placed.append((lx, ly))
+        anchor = "south" if dy >= 0 else "north"
+        label_lines.append(
+            f"\\node[font=\\tiny, anchor={anchor}, fill=white, fill opacity=0.78, "
+            f"text opacity=1, inner sep=0.5pt, rounded corners=0.5pt] "
+            f"at ({lx:.3f},{ly:.3f}) {{{_esc(n['label'])}}};"
+        )
 
     body = f"""\\begin{{tikzpicture}}[scale=1.0]
 \\begin{{scope}}[on background layer]
@@ -840,12 +897,14 @@ def emit_completeness_only(completeness: Dict[str, Any], by_year: pd.DataFrame) 
 {rows}
   }};
 \\addlegendentry{{Observed}}
-\\node[anchor=north west, font=\\scriptsize, draw=black!30, inner sep=2pt]
+\\node[anchor=north west, font=\\scriptsize, draw=black!30, inner sep=2pt, align=left]
   at (axis cs:{int(df['Year'].min())},{max(cum)*0.97:.0f})
-  {{Linear $R^2={completeness['linear_r2']:.3f}$\\\\
-    Exp.\\ $R^2={completeness['exponential_r2']:.3f}$\\\\
-    Gompertz $R^2={completeness['gompertz_r2']:.3f}$\\\\
-    Saturation $={sat:.3f}$}};
+  {{Linear $R^{2}={completeness['linear_r2']:.3f}$\\\\
+    Exp.\\ $R^{2}={completeness['exponential_r2']:.3f}$\\\\
+    Gompertz $R^{2}={completeness['gompertz_r2']:.3f}$\\\\
+    Bi-logistic $R^{2}={completeness.get('bilogistic_r2', float('nan')):.3f}$\\\\
+    Best model (AIC): {_esc(str(completeness.get('best_model', 'n/a')))}\\\\
+    Gompertz saturation $={sat:.3f}$}};
 \\end{{axis}}
 \\end{{tikzpicture}}"""
     return _emit("F02_completeness", body)

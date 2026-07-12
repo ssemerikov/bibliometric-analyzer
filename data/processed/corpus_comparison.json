@@ -1,0 +1,731 @@
+{
+  "original_88": {
+    "n_documents": 88,
+    "year_range": [
+      2011,
+      2026
+    ],
+    "completeness": {
+      "cumulative_at_last_year": 88.0,
+      "years_observed": 16,
+      "linear_r2": 0.9195421359029171,
+      "linear_aic": 75.09621316997506,
+      "linear_bic": 77.4139793366944,
+      "exponential_r2": 0.9589629615289934,
+      "exponential_aic": 64.32407582954369,
+      "exponential_bic": 66.64184199626303,
+      "gompertz_r2": 0.9943243661203535,
+      "gompertz_aic": 34.67139131334622,
+      "gompertz_bic": 37.76174620230534,
+      "bilogistic_r2": 0.9981189722184477,
+      "bilogistic_aic": 23.001568366006026,
+      "bilogistic_bic": 28.40968942168449,
+      "saturation_ratio": 0.5478656949156905,
+      "gompertz_asymptote": 160.62330753076643,
+      "bilogistic_asymptote": 92.43407877862823,
+      "best_model": "bilogistic",
+      "delta_aic_bilogistic_minus_gompertz": -11.669822947340194
+    },
+    "keyword_network": {
+      "nodes": 22,
+      "edges": 54,
+      "density": 0.23376623376623376,
+      "avg_degree": 4.909090909090909,
+      "n_clusters_at_gamma_1": 5,
+      "ari_vs_baseline_gamma_1": {
+        "0.5": 0.4066183136899365,
+        "0.75": 0.655673560648407,
+        "1.0": 1.0,
+        "1.25": 1.0,
+        "1.5": 0.7502027575020277
+      },
+      "top_by_degree_centrality": [
+        {
+          "keyword": "game development",
+          "deg_cent": 0.6666666666666666
+        },
+        {
+          "keyword": "unity",
+          "deg_cent": 0.5238095238095237
+        },
+        {
+          "keyword": "game",
+          "deg_cent": 0.3333333333333333
+        },
+        {
+          "keyword": "virtual reality",
+          "deg_cent": 0.3333333333333333
+        },
+        {
+          "keyword": "education",
+          "deg_cent": 0.2857142857142857
+        },
+        {
+          "keyword": "game engine",
+          "deg_cent": 0.2857142857142857
+        },
+        {
+          "keyword": "mixed reality",
+          "deg_cent": 0.2857142857142857
+        },
+        {
+          "keyword": "serious game",
+          "deg_cent": 0.2857142857142857
+        },
+        {
+          "keyword": "augmented reality",
+          "deg_cent": 0.23809523809523808
+        },
+        {
+          "keyword": "game-based learning",
+          "deg_cent": 0.23809523809523808
+        }
+      ],
+      "top_by_betweenness_centrality": [
+        {
+          "keyword": "game development",
+          "bet_cent": 0.18603174603174608
+        },
+        {
+          "keyword": "unity",
+          "bet_cent": 0.14079365079365078
+        },
+        {
+          "keyword": "game-based learning",
+          "bet_cent": 0.1165873015873016
+        },
+        {
+          "keyword": "motivation",
+          "bet_cent": 0.07357142857142857
+        },
+        {
+          "keyword": "mixed reality",
+          "bet_cent": 0.0646031746031746
+        },
+        {
+          "keyword": "game",
+          "bet_cent": 0.061825396825396825
+        },
+        {
+          "keyword": "serious game",
+          "bet_cent": 0.05507936507936508
+        },
+        {
+          "keyword": "game engine",
+          "bet_cent": 0.02380952380952381
+        },
+        {
+          "keyword": "computer game",
+          "bet_cent": 0.015000000000000003
+        },
+        {
+          "keyword": "virtual reality",
+          "bet_cent": 0.01404761904761905
+        }
+      ],
+      "unity": {
+        "node": "unity",
+        "degree": 11,
+        "degree_centrality": 0.5238095238095237,
+        "betweenness_centrality": 0.14079365079365078,
+        "rank_by_degree_centrality": 2,
+        "top_neighbors": [
+          "game development",
+          "virtual reality",
+          "augmented reality",
+          "education",
+          "educational game",
+          "game",
+          "game engine",
+          "game-based learning"
+        ]
+      }
+    },
+    "affiliation": {
+      "hhi_country": 0.07112667552227991,
+      "hhi_institution": 0.010816000000000001,
+      "gini_country": 0.4355644355644355,
+      "gini_institution": 0.12274074074074075,
+      "unique_countries": 33,
+      "unique_institutions": 108,
+      "top_countries": [
+        [
+          "United States",
+          18
+        ],
+        [
+          "India",
+          10
+        ],
+        [
+          "Germany",
+          5
+        ],
+        [
+          "Indonesia",
+          4
+        ],
+        [
+          "China",
+          4
+        ],
+        [
+          "Brazil",
+          3
+        ],
+        [
+          "Ukraine",
+          3
+        ],
+        [
+          "Poland",
+          3
+        ],
+        [
+          "Denmark",
+          3
+        ],
+        [
+          "Spain",
+          3
+        ]
+      ]
+    },
+    "temporal_coupling": {
+      "eras": {
+        "pre-2018": {
+          "n_docs": 12,
+          "n_coupling_edges": 2,
+          "density": 0.030303030303030304
+        },
+        "2018-2021": {
+          "n_docs": 34,
+          "n_coupling_edges": 3,
+          "density": 0.0053475935828877
+        },
+        "2022-2026": {
+          "n_docs": 42,
+          "n_coupling_edges": 9,
+          "density": 0.010452961672473868
+        }
+      },
+      "kendall_tau": {
+        "pre-2018_vs_2018-2021": -0.30854923382617944,
+        "pre-2018_vs_2022-2026": -0.3580447835898074,
+        "2018-2021_vs_2022-2026": -0.6739245878351103
+      },
+      "top_refs_per_era": {
+        "pre-2018": [
+          [
+            "de_2011",
+            2
+          ],
+          [
+            "schell_2008",
+            2
+          ],
+          [
+            "flow_1990",
+            2
+          ],
+          [
+            "serious_2011",
+            2
+          ],
+          [
+            "bierre_2007",
+            1
+          ]
+        ],
+        "2018-2021": [
+          [
+            "angel_2012",
+            2
+          ],
+          [
+            "angel_2011",
+            2
+          ],
+          [
+            "interactive_2000",
+            2
+          ],
+          [
+            "csci_2011",
+            2
+          ],
+          [
+            "computer_2004",
+            2
+          ]
+        ],
+        "2022-2026": [
+          [
+            "comber_2019",
+            3
+          ],
+          [
+            "akçayir_2017",
+            2
+          ],
+          [
+            "proceedings_2018",
+            2
+          ],
+          [
+            "koca_2019",
+            2
+          ],
+          [
+            "international_2018",
+            2
+          ]
+        ]
+      }
+    },
+    "theory": {
+      "n_platforms_with_corpus_mentions": 4,
+      "h1": {
+        "rho": NaN,
+        "n": 1,
+        "pairs": [
+          [
+            0.20492998163452708,
+            0.5238095238095237,
+            "unity"
+          ]
+        ],
+        "note": "Too few platforms with corpus mentions AND graph nodes for correlation."
+      },
+      "h2": {
+        "rho": -0.19999999999999998,
+        "n": 4,
+        "platforms": [
+          "unity",
+          "unreal",
+          "unreal engine",
+          "construct"
+        ]
+      },
+      "h3": {
+        "rho": 0.9486832980505139,
+        "n": 4,
+        "platforms": [
+          "unity",
+          "unreal",
+          "unreal engine",
+          "construct"
+        ]
+      },
+      "platform_scores_summary": {
+        "unity": {
+          "n_docs": 88,
+          "rogers_total": 0.20492998163452708,
+          "avg_year": 2020.8977272727273,
+          "avg_citations": 4.909090909090909
+        },
+        "unreal": {
+          "n_docs": 7,
+          "rogers_total": 0.23737373737373738,
+          "avg_year": 2021.4285714285713,
+          "avg_citations": 7.571428571428571
+        },
+        "unreal engine": {
+          "n_docs": 4,
+          "rogers_total": 0.1755050505050505,
+          "avg_year": 2023.25,
+          "avg_citations": 3.25
+        },
+        "construct": {
+          "n_docs": 1,
+          "rogers_total": 0.18333333333333335,
+          "avg_year": 2014.0,
+          "avg_citations": 0.0
+        }
+      }
+    }
+  },
+  "debiased_1511": {
+    "n_documents": 1511,
+    "year_range": [
+      1997,
+      2026
+    ],
+    "completeness": {
+      "cumulative_at_last_year": 1511.0,
+      "years_observed": 29,
+      "linear_r2": 0.8856874271854083,
+      "linear_aic": 301.95036333103684,
+      "linear_bic": 306.0522508209963,
+      "exponential_r2": 0.9749432686880118,
+      "exponential_aic": 257.93433568829164,
+      "exponential_bic": 262.036223178251,
+      "gompertz_r2": 0.9980674670428232,
+      "gompertz_aic": 185.62731810980318,
+      "gompertz_bic": 191.09650142974908,
+      "bilogistic_r2": 0.998894773710816,
+      "bilogistic_aic": 175.4226559175625,
+      "bilogistic_bic": 184.99372672746782,
+      "saturation_ratio": 0.41376757980010004,
+      "gompertz_asymptote": 3651.8085847373454,
+      "bilogistic_asymptote": 2042.7282327143857,
+      "best_model": "bilogistic",
+      "delta_aic_bilogistic_minus_gompertz": -10.204662192240676
+    },
+    "keyword_network": {
+      "nodes": 304,
+      "edges": 2305,
+      "density": 0.05004776793468821,
+      "avg_degree": 15.164473684210526,
+      "n_clusters_at_gamma_1": 8,
+      "ari_vs_baseline_gamma_1": {
+        "0.5": 0.0329854314031638,
+        "0.75": 0.4725240185456956,
+        "1.0": 1.0,
+        "1.25": 0.4533521293234213,
+        "1.5": 0.33659402437449215
+      },
+      "top_by_degree_centrality": [
+        {
+          "keyword": "game development",
+          "deg_cent": 0.7227722772277227
+        },
+        {
+          "keyword": "serious game",
+          "deg_cent": 0.48184818481848185
+        },
+        {
+          "keyword": "game-based learning",
+          "deg_cent": 0.42574257425742573
+        },
+        {
+          "keyword": "education",
+          "deg_cent": 0.39603960396039606
+        },
+        {
+          "keyword": "game design",
+          "deg_cent": 0.32673267326732675
+        },
+        {
+          "keyword": "game",
+          "deg_cent": 0.3069306930693069
+        },
+        {
+          "keyword": "gamification",
+          "deg_cent": 0.30363036303630364
+        },
+        {
+          "keyword": "educational game",
+          "deg_cent": 0.2871287128712871
+        },
+        {
+          "keyword": "higher education",
+          "deg_cent": 0.19801980198019803
+        },
+        {
+          "keyword": "virtual reality",
+          "deg_cent": 0.1716171617161716
+        }
+      ],
+      "top_by_betweenness_centrality": [
+        {
+          "keyword": "game development",
+          "bet_cent": 0.16893085389493417
+        },
+        {
+          "keyword": "serious game",
+          "bet_cent": 0.09528096126413807
+        },
+        {
+          "keyword": "game-based learning",
+          "bet_cent": 0.07428896869466001
+        },
+        {
+          "keyword": "game design",
+          "bet_cent": 0.06988567151956604
+        },
+        {
+          "keyword": "education",
+          "bet_cent": 0.06306682028485158
+        },
+        {
+          "keyword": "educational game",
+          "bet_cent": 0.05536158535092325
+        },
+        {
+          "keyword": "gamification",
+          "bet_cent": 0.05484172037784187
+        },
+        {
+          "keyword": "game",
+          "bet_cent": 0.05422215186103826
+        },
+        {
+          "keyword": "higher education",
+          "bet_cent": 0.028039863584209894
+        },
+        {
+          "keyword": "game education",
+          "bet_cent": 0.02238311182310704
+        }
+      ],
+      "unity": {
+        "node": "unity",
+        "degree": 44,
+        "degree_centrality": 0.14521452145214522,
+        "betweenness_centrality": 0.019628703282732272,
+        "rank_by_degree_centrality": 15,
+        "top_neighbors": [
+          "game development",
+          "virtual reality",
+          "education",
+          "game",
+          "game engine",
+          "augmented reality",
+          "c#",
+          "early childhood science education"
+        ]
+      }
+    },
+    "affiliation": {
+      "hhi_country": 0.06500354139274403,
+      "hhi_institution": 0.0009399477806788512,
+      "gini_country": 0.687606018722121,
+      "gini_institution": 0.18607427284422848,
+      "unique_countries": 88,
+      "unique_institutions": 1514,
+      "top_countries": [
+        [
+          "United States",
+          306
+        ],
+        [
+          "United Kingdom",
+          89
+        ],
+        [
+          "Germany",
+          66
+        ],
+        [
+          "Brazil",
+          62
+        ],
+        [
+          "China",
+          61
+        ],
+        [
+          "Indonesia",
+          61
+        ],
+        [
+          "Malaysia",
+          57
+        ],
+        [
+          "Spain",
+          44
+        ],
+        [
+          "Canada",
+          43
+        ],
+        [
+          "Australia",
+          32
+        ]
+      ]
+    },
+    "temporal_coupling": {
+      "eras": {
+        "pre-2018": {
+          "n_docs": 654,
+          "n_coupling_edges": 10086,
+          "density": 0.0472343594138556
+        },
+        "2018-2021": {
+          "n_docs": 347,
+          "n_coupling_edges": 2635,
+          "density": 0.04389398810614516
+        },
+        "2022-2026": {
+          "n_docs": 510,
+          "n_coupling_edges": 5644,
+          "density": 0.043483955468238376
+        }
+      },
+      "kendall_tau": {
+        "pre-2018_vs_2018-2021": -0.20811971359122053,
+        "pre-2018_vs_2022-2026": -0.44133975808203774,
+        "2018-2021_vs_2022-2026": -0.3347416568329642
+      },
+      "top_refs_per_era": {
+        "pre-2018": [
+          [
+            "prensky_2001",
+            53
+          ],
+          [
+            "gee_2003",
+            47
+          ],
+          [
+            "driskell_2002",
+            31
+          ],
+          [
+            "claypool_2005",
+            25
+          ],
+          [
+            "smith_2006",
+            22
+          ]
+        ],
+        "2018-2021": [
+          [
+            "gee_2003",
+            16
+          ],
+          [
+            "(2020)_2020",
+            15
+          ],
+          [
+            "de_2006",
+            13
+          ],
+          [
+            "(2019)_2019",
+            13
+          ],
+          [
+            "zubek_2004",
+            12
+          ]
+        ],
+        "2022-2026": [
+          [
+            "kinzer_2015",
+            23
+          ],
+          [
+            "li_2024",
+            18
+          ],
+          [
+            "clarke_2006",
+            17
+          ],
+          [
+            "zubek_2004",
+            16
+          ],
+          [
+            "widyani_2013",
+            15
+          ]
+        ]
+      }
+    },
+    "theory": {
+      "n_platforms_with_corpus_mentions": 8,
+      "h1": {
+        "rho": NaN,
+        "n": 2,
+        "pairs": [
+          [
+            0.22254503800895553,
+            0.14521452145214522,
+            "unity"
+          ],
+          [
+            0.27367424242424243,
+            0.033003300330033,
+            "unreal engine"
+          ]
+        ],
+        "note": "Too few platforms with corpus mentions AND graph nodes for correlation."
+      },
+      "h2": {
+        "rho": -0.11976262619132588,
+        "n": 8,
+        "platforms": [
+          "unity",
+          "unreal",
+          "unreal engine",
+          "godot",
+          "gamemaker",
+          "construct",
+          "roblox",
+          "cocos2d"
+        ]
+      },
+      "h3": {
+        "rho": 0.4311454542887732,
+        "n": 8,
+        "platforms": [
+          "unity",
+          "unreal",
+          "unreal engine",
+          "godot",
+          "gamemaker",
+          "construct",
+          "roblox",
+          "cocos2d"
+        ]
+      },
+      "platform_scores_summary": {
+        "unity": {
+          "n_docs": 97,
+          "rogers_total": 0.22254503800895553,
+          "avg_year": 2021.1649484536083,
+          "avg_citations": 5.010309278350515
+        },
+        "unreal": {
+          "n_docs": 22,
+          "rogers_total": 0.27894857667584944,
+          "avg_year": 2021.909090909091,
+          "avg_citations": 4.590909090909091
+        },
+        "unreal engine": {
+          "n_docs": 16,
+          "rogers_total": 0.27367424242424243,
+          "avg_year": 2023.0,
+          "avg_citations": 3.5
+        },
+        "godot": {
+          "n_docs": 3,
+          "rogers_total": 0.09141414141414142,
+          "avg_year": 2024.6666666666667,
+          "avg_citations": 2.3333333333333335
+        },
+        "gamemaker": {
+          "n_docs": 3,
+          "rogers_total": 0.13468013468013468,
+          "avg_year": 2016.3333333333333,
+          "avg_citations": 3.6666666666666665
+        },
+        "construct": {
+          "n_docs": 5,
+          "rogers_total": 0.03666666666666667,
+          "avg_year": 2020.0,
+          "avg_citations": 2.4
+        },
+        "roblox": {
+          "n_docs": 1,
+          "rogers_total": 0.19444444444444442,
+          "avg_year": 2023.0,
+          "avg_citations": 22.0
+        },
+        "cocos2d": {
+          "n_docs": 1,
+          "rogers_total": 0.2777777777777778,
+          "avg_year": 2011.0,
+          "avg_citations": 2.0
+        }
+      }
+    }
+  }
+}

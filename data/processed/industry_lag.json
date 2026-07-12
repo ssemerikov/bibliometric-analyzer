@@ -1,0 +1,134 @@
+{
+  "min_occ": 3,
+  "families": {
+    "mobile": {
+      "n_docs_author_keyword": 33,
+      "n_docs_abstract": 253,
+      "n_docs_abstract_2022plus": 96,
+      "in_keyword_network": true,
+      "network_terms": [
+        "android",
+        "mobile application",
+        "mobile game",
+        "mobile learning"
+      ],
+      "abstract_by_year": {
+        "2006": 5,
+        "2007": 2,
+        "2008": 3,
+        "2009": 8,
+        "2010": 6,
+        "2011": 6,
+        "2012": 11,
+        "2013": 13,
+        "2014": 5,
+        "2015": 13,
+        "2016": 11,
+        "2017": 10,
+        "2018": 13,
+        "2019": 14,
+        "2020": 14,
+        "2021": 23,
+        "2022": 11,
+        "2023": 21,
+        "2024": 25,
+        "2025": 34,
+        "2026": 5
+      }
+    },
+    "generative_ai": {
+      "n_docs_author_keyword": 12,
+      "n_docs_abstract": 40,
+      "n_docs_abstract_2022plus": 24,
+      "in_keyword_network": true,
+      "network_terms": [
+        "chatgpt",
+        "generative ai",
+        "large language model"
+      ],
+      "abstract_by_year": {
+        "2005": 1,
+        "2006": 1,
+        "2007": 1,
+        "2008": 2,
+        "2009": 4,
+        "2013": 4,
+        "2014": 1,
+        "2019": 1,
+        "2020": 1,
+        "2023": 4,
+        "2024": 9,
+        "2025": 11
+      }
+    },
+    "immersive_xr": {
+      "n_docs_author_keyword": 65,
+      "n_docs_abstract": 127,
+      "n_docs_abstract_2022plus": 80,
+      "in_keyword_network": true,
+      "network_terms": [
+        "augmented reality",
+        "extended reality",
+        "metaverse",
+        "mixed reality",
+        "virtual reality"
+      ],
+      "abstract_by_year": {
+        "1997": 1,
+        "2000": 1,
+        "2006": 3,
+        "2010": 1,
+        "2012": 1,
+        "2013": 3,
+        "2014": 1,
+        "2015": 1,
+        "2016": 3,
+        "2017": 4,
+        "2018": 4,
+        "2019": 8,
+        "2020": 5,
+        "2021": 11,
+        "2022": 5,
+        "2023": 20,
+        "2024": 20,
+        "2025": 29,
+        "2026": 6
+      }
+    },
+    "ai_general": {
+      "n_docs_author_keyword": 30,
+      "n_docs_abstract": 118,
+      "n_docs_abstract_2022plus": 74,
+      "in_keyword_network": true,
+      "network_terms": [
+        "artificial intelligence",
+        "deep learning",
+        "machine learning",
+        "procedural content generation"
+      ],
+      "abstract_by_year": {
+        "2005": 3,
+        "2006": 6,
+        "2008": 3,
+        "2009": 1,
+        "2010": 1,
+        "2011": 1,
+        "2012": 2,
+        "2013": 4,
+        "2014": 1,
+        "2015": 3,
+        "2016": 2,
+        "2017": 1,
+        "2018": 1,
+        "2019": 6,
+        "2020": 5,
+        "2021": 4,
+        "2022": 8,
+        "2023": 12,
+        "2024": 14,
+        "2025": 33,
+        "2026": 7
+      }
+    }
+  }
+}
